@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw4q3om30tfju"]
+[gd_scene load_steps=4 format=3 uid="uid://bw4q3om30tfju"]
 
+[ext_resource type="Script" path="res://assets/scripts/game_controller.gd" id="1_0ndpu"]
 [ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void_room.tscn" id="1_7dq8o"]
 [ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="2_kjx0t"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_0ndpu")
 
 [node name="VoidRoom" parent="." instance=ExtResource("1_7dq8o")]
 

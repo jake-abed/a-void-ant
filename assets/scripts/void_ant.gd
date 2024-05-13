@@ -39,7 +39,9 @@ enum State {Normal, Void, Dash}
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
+	# Start the animation tree if it isn't running.
 	anim_tree.active = true
+	# Connect all timers.
 	ball_timer.timeout.connect(_ball_timer_timeout)
 	coyote_timer.timeout.connect(_coyote_timer_timeout)
 	dash_timer.timeout.connect(_dash_timer_timeout)
@@ -48,18 +50,22 @@ func _process(delta):
 	set_sprite_direction()
 
 func _physics_process(delta):
+	# Set the facing_factor to affect direction-based movements.
 	if sprite.flip_h:
 		facing_factor = -1.0
 	else:
 		facing_factor = 1.0
 	
+	# Set per frame movement X speed based off current movement type.
 	var speed := SPEED
 	if balled:
 		speed = BALL_SPEED
 	
+	# Reset abilitity to jump if the player has touched the floor.
 	if (is_on_floor()):
 		can_jump = true
 	
+	# If the player has left the floor, start coyote timer and let player be affected by gravity.
 	if not is_on_floor() && !balled:
 		if coyote_timer.is_stopped() && can_jump:
 			coyote_timer.start()
@@ -68,13 +74,16 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 		grounded = false
 	
+	# Allow dash if possible.
 	if can_dash && !balled && Input.is_action_just_pressed("dash"):
 		dash()
-
+	
+	# At this point, we know enough about player movement to set animations.
 	if (is_on_floor() && !grounded && !balled):
 		grounded = true
 		anim_states.travel("Move")
 	
+	# Allow void ball ability.
 	if (balled == false && can_ball && Input.is_action_just_pressed("void_ball")):
 		balled = true
 		can_ball = false
@@ -82,6 +91,7 @@ func _physics_process(delta):
 		ball_particles.emitting = true
 		ball_timer.start()
 	
+	# Execute void ball y-movement.
 	if (balled):
 		direction.y = Input.get_axis("move_up", "move_down")
 		if direction.y:
@@ -103,7 +113,6 @@ func _physics_process(delta):
 		anim_states.travel("falling")
 	
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction.x = Input.get_axis("move_left", "move_right")
 	anim_tree.set("parameters/Move/blend_position", direction.x)
 	if direction.x && !dashing:
@@ -124,20 +133,6 @@ func set_sprite_direction() -> void:
 		sprite.flip_h = false
 	else: pass
 
-func _ball_timer_timeout() -> void:
-	if balled:
-		ball_particles.emitting = false
-		anim_states.travel("from_ball")
-		balled = false
-		can_ball = false
-		ball_timer.wait_time = 5.0
-		print("exiting ball, resetting timer")
-		ball_timer.start()
-	else:
-		print("Can ball again!")
-		ball_timer.wait_time = 1.0
-		can_ball = true
-
 func dash() -> void:
 	print("TRYING TO DASH")
 	if can_dash:
@@ -153,6 +148,28 @@ func dash() -> void:
 	else:
 		pass
 
+func start_coyote_timer() -> void:
+	coyote_timer.start()
+
+## Timeout functions
+
+func _ball_timer_timeout() -> void:
+	if balled:
+		ball_particles.emitting = false
+		anim_states.travel("from_ball")
+		balled = false
+		can_ball = false
+		ball_timer.wait_time = 5.0
+		print("exiting ball, resetting timer")
+		ball_timer.start()
+	else:
+		print("Can ball again!")
+		ball_timer.wait_time = 1.0
+		can_ball = true
+
+func _coyote_timer_timeout() -> void:
+	can_jump = false
+
 func _dash_timer_timeout() -> void:
 	if dashing:
 		dashing = false
@@ -161,9 +178,3 @@ func _dash_timer_timeout() -> void:
 	else:
 		can_dash = true
 		dash_factor = 3.0
-
-func start_coyote_timer() -> void:
-	coyote_timer.start()
-
-func _coyote_timer_timeout() -> void:
-	can_jump = false

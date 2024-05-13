@@ -454,6 +454,7 @@ texture = SubResource("GradientTexture2D_j5vgc")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_arn2e")
 hframes = 29
+frame = 4
 region_rect = Rect2(0, 0, 528, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

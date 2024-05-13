@@ -81,10 +81,11 @@ fill = 1
 fill_from = Vector2(0.536697, 0.509174)
 fill_to = Vector2(0.862385, 0.122324)
 
-[node name="TheVoid" type="Area2D" node_paths=PackedStringArray("sprite")]
+[node name="TheVoid" type="Area2D" node_paths=PackedStringArray("sprite", "light")]
 scale = Vector2(2, 2)
 script = ExtResource("1_gvaba")
 sprite = NodePath("AnimatedSprite2D")
+light = NodePath("PointLight2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ahl56")
