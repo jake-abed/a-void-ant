@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://mvts1u0fvq20"]
+[gd_scene load_steps=9 format=3 uid="uid://mvts1u0fvq20"]
 
 [ext_resource type="Texture2D" uid="uid://rx6y8xcgx2ju" path="res://assets/sprites/dirt.png" id="1_uiqmi"]
 [ext_resource type="PackedScene" uid="uid://cea8ghp5b1o0r" path="res://scenes/sky.tscn" id="2_ijpaf"]
-[ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="3_vht74"]
+[ext_resource type="Script" path="res://assets/scripts/portal.gd" id="4_3c522"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xt1yp"]
 
@@ -63,6 +63,9 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_xt1yp")
 sources/1 = SubResource("TileSetAtlasSource_6qy3j")
 sources/0 = SubResource("TileSetAtlasSource_wm4g1")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nve8i"]
+size = Vector2(93.5, 119)
+
 [node name="Hills" type="Node2D"]
 position = Vector2(616, 264)
 
@@ -75,15 +78,18 @@ layer_0/tile_data = PackedInt32Array(-131093, 65537, 0, -131092, 65537, 0, -1310
 
 [node name="Sky" parent="." instance=ExtResource("2_ijpaf")]
 
-[node name="Player" parent="." instance=ExtResource("3_vht74")]
-position = Vector2(1004, -251)
+[node name="HillsWest" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
+position = Vector2(-785, 8)
+scale = Vector2(1, 1.28)
+script = ExtResource("4_3c522")
+target_room = "Void"
+target_location = "VoidEast"
+collision_shape = NodePath("CollisionShape2D")
+spawn = NodePath("Spawn")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.5, 1.5)
-limit_left = -200
-position_smoothing_enabled = true
-position_smoothing_speed = 8.0
-drag_vertical_enabled = true
-drag_left_margin = 0.0
-drag_top_margin = 0.1
-drag_right_margin = 0.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HillsWest"]
+position = Vector2(39, -63)
+shape = SubResource("RectangleShape2D_nve8i")
+
+[node name="Spawn" type="Marker2D" parent="HillsWest"]
+position = Vector2(148, -11.7188)

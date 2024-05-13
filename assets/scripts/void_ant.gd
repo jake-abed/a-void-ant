@@ -8,6 +8,8 @@ const INERTIA := 0.4
 
 enum State {Normal, Void, Dash}
 
+var rooms_entered = 0
+
 @export_group("Attached Nodes")
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
@@ -16,6 +18,7 @@ enum State {Normal, Void, Dash}
 @export var ball_timer: Timer
 @export var coyote_timer: Timer
 @export var dash_timer: Timer
+@export var room_timer: Timer
 @export var ball_particles: GPUParticles2D
 
 @export_group("Ability Values")
@@ -27,6 +30,7 @@ enum State {Normal, Void, Dash}
 
 # In light of not using a state machine, these are the state bools
 @onready var grounded := false
+@onready var can_change_rooms := true
 @onready var balled := false
 @onready var can_ball := true
 @onready var can_jump := false
@@ -45,6 +49,8 @@ func _ready() -> void:
 	ball_timer.timeout.connect(_ball_timer_timeout)
 	coyote_timer.timeout.connect(_coyote_timer_timeout)
 	dash_timer.timeout.connect(_dash_timer_timeout)
+	room_timer.timeout.connect(_on_room_change_timeout)
+	SceneManager.room_change.connect(_on_room_change)
 
 func _process(delta):
 	set_sprite_direction()
@@ -178,3 +184,13 @@ func _dash_timer_timeout() -> void:
 	else:
 		can_dash = true
 		dash_factor = 3.0
+
+func _on_room_change_timeout() -> void:
+	can_change_rooms = true
+
+func _on_room_change() -> void:
+	can_change_rooms = false
+	room_timer.wait_time = 1.0
+	room_timer.start()
+	rooms_entered += 1
+

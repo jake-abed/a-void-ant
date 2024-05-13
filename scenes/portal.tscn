@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="1_2i1re"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nve8i"]
+size = Vector2(93.5, 119)
 
 [node name="Portal" type="Area2D" node_paths=PackedStringArray("collision_shape", "spawn")]
 script = ExtResource("1_2i1re")
@@ -13,4 +14,4 @@ spawn = NodePath("Spawn")
 shape = SubResource("RectangleShape2D_nve8i")
 
 [node name="Spawn" type="Marker2D" parent="."]
-position = Vector2(-19, 0)
+position = Vector2(-35, 0)

@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmxpx8q4xd4lr"]
+[gd_scene load_steps=12 format=3 uid="uid://bmxpx8q4xd4lr"]
 
 [ext_resource type="Texture2D" uid="uid://dh5rk8yggcgqf" path="res://assets/sprites/void-block.png" id="1_lao45"]
 [ext_resource type="PackedScene" uid="uid://blik1dw7skd68" path="res://scenes/characters/the_void.tscn" id="3_ydmjy"]
 [ext_resource type="Texture2D" uid="uid://dl61uhx6o6urf" path="res://assets/sprites/void-bg.png" id="4_xcyn1"]
 [ext_resource type="Texture2D" uid="uid://bpeo306muubj4" path="res://assets/sprites/void-stars.png" id="5_1kowx"]
 [ext_resource type="Texture2D" uid="uid://di2o188w8bxi1" path="res://assets/sprites/void-nebula.png" id="5_7jphg"]
-[ext_resource type="PackedScene" uid="uid://c8p1ggwib1uhm" path="res://scenes/portal.tscn" id="6_2mv8c"]
+[ext_resource type="Script" path="res://assets/scripts/portal.gd" id="6_1q15c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_83d3l"]
 friction = 0.75
@@ -34,7 +34,10 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_83d3l")
 sources/0 = SubResource("TileSetAtlasSource_udj6n")
 sources/1 = SubResource("TileSetAtlasSource_u3q6v")
 
-[node name="VoidRoom" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nve8i"]
+size = Vector2(93.5, 119)
+
+[node name="Void" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(498, 332)
@@ -53,6 +56,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(576, 324)
+scale = Vector2(2, 2)
 motion_mirroring = Vector2(1152, 648)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
@@ -74,6 +78,17 @@ motion_mirroring = Vector2(1152, 648)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource("5_1kowx")
 
-[node name="Portal" parent="." instance=ExtResource("6_2mv8c")]
-position = Vector2(1055, 428)
-scale = Vector2(6.76366, 3.1362)
+[node name="VoidEast" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
+position = Vector2(1043, 428)
+script = ExtResource("6_1q15c")
+target_room = "Hills"
+target_location = "HillsWest"
+collision_shape = NodePath("CollisionShape2D")
+spawn = NodePath("Spawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidEast"]
+position = Vector2(81.25, -0.5)
+shape = SubResource("RectangleShape2D_nve8i")
+
+[node name="Spawn" type="Marker2D" parent="VoidEast"]
+position = Vector2(-39, 23)

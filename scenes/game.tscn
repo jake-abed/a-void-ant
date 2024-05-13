@@ -7,11 +7,10 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_0ndpu")
 
-[node name="VoidRoom" parent="." instance=ExtResource("1_7dq8o")]
+[node name="Void" parent="." instance=ExtResource("1_7dq8o")]
 
 [node name="Player" parent="." instance=ExtResource("2_kjx0t")]
 position = Vector2(522, 438)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
-position_smoothing_enabled = true

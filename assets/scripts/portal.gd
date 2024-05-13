@@ -14,4 +14,5 @@ func _ready() -> void:
 
 func _on_body_entered(body: CharacterBody2D) -> void:
 	if body is Player:
-		print("Player Entered a Portal")
+		if body.can_change_rooms:
+			SceneManager.go_to_level(target_room, target_location)
