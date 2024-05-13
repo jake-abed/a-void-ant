@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://blik1dw7skd68"]
+
+[ext_resource type="Texture2D" uid="uid://c1mjmimw6xutx" path="res://assets/sprites/the-void-blur.png" id="1_4obnh"]
+[ext_resource type="Script" path="res://assets/scripts/the_void.gd" id="1_gvaba"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahl56"]
+radius = 97.0116
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywmtt"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5d50"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iwvm"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5bo6"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hedrb"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fbjf"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0msho"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tbfl"]
+atlas = ExtResource("1_4obnh")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6135"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywmtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5d50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iwvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5bo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hedrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fbjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0msho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tbfl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_lvxa8"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w36os"]
+gradient = SubResource("Gradient_lvxa8")
+width = 500
+height = 300
+fill = 1
+fill_from = Vector2(0.536697, 0.509174)
+fill_to = Vector2(0.862385, 0.122324)
+
+[node name="TheVoid" type="Area2D" node_paths=PackedStringArray("sprite")]
+scale = Vector2(2, 2)
+script = ExtResource("1_gvaba")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ahl56")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d6135")
+frame_progress = 0.322956
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.25
+blend_mode = 2
+texture = SubResource("GradientTexture2D_w36os")

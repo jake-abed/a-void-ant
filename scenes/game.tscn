@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw4q3om30tfju"]
+
+[ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void_room.tscn" id="1_7dq8o"]
+[ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="2_kjx0t"]
+
+[node name="Game" type="Node2D"]
+
+[node name="VoidRoom" parent="." instance=ExtResource("1_7dq8o")]
+
+[node name="Player" parent="." instance=ExtResource("2_kjx0t")]
+position = Vector2(522, 438)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
