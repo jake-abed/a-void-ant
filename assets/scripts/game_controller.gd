@@ -1,10 +1,13 @@
 class_name GameController
 extends Node2D
 
+@onready var fade_player := $FadeLayer/AnimationPlayer
 
 func _ready():
-	pass # Replace with function body.
+	SceneManager.room_change.connect(_on_room_change)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_room_change() -> void:
+	fade_player.queue("fade")

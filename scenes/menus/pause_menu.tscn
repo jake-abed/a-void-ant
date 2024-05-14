@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://djdkas1r5gow5"]
+
+[ext_resource type="Script" path="res://assets/scripts/pause_menu.gd" id="1_lftua"]
+
+[sub_resource type="Gradient" id="Gradient_gft5b"]
+colors = PackedColorArray(0, 0, 0, 0.254902, 0, 0, 0, 0.839216)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cceyx"]
+gradient = SubResource("Gradient_gft5b")
+width = 1152
+height = 524
+fill = 1
+fill_from = Vector2(0.489583, 0.505208)
+fill_to = Vector2(0.135417, 0.160305)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6npmu"]
+font_size = 32
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("pause_button")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lftua")
+pause_button = NodePath("Button")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = SubResource("GradientTexture2D_cceyx")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 222.0
+offset_right = 659.0
+offset_bottom = 287.0
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_6npmu")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 308.0
+offset_right = 621.0
+offset_bottom = 339.0
+text = "CONTINUE"

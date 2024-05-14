@@ -165,7 +165,7 @@ func _ball_timer_timeout() -> void:
 		anim_states.travel("from_ball")
 		balled = false
 		can_ball = false
-		ball_timer.wait_time = 5.0
+		ball_timer.wait_time = 2.0
 		print("exiting ball, resetting timer")
 		ball_timer.start()
 	else:
@@ -190,7 +190,7 @@ func _on_room_change_timeout() -> void:
 
 func _on_room_change() -> void:
 	can_change_rooms = false
-	room_timer.wait_time = 1.0
+	room_timer.wait_time = 0.1
 	room_timer.start()
 	rooms_entered += 1
 

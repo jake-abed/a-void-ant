@@ -1,6 +1,6 @@
 extends Node
 
-const scene_void = preload("res://scenes/levels/void_room.tscn")
+const scene_void = preload("res://scenes/levels/void.tscn")
 const scene_hills = preload("res://scenes/levels/hills.tscn")
 
 signal room_change

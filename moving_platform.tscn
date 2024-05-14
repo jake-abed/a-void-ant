@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dapr7uyvrfhbs"]
+
+[ext_resource type="Texture2D" uid="uid://ddmf118wuplto" path="res://assets/sprites/platform.png" id="1_o500x"]
+
+[sub_resource type="Curve2D" id="Curve2D_jfv56"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -200, 0, 0, 0, 0, 0, -400)
+}
+point_count = 3
+
+[node name="MovingPlatform" type="Path2D"]
+curve = SubResource("Curve2D_jfv56")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotation = -1.5708
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("1_o500x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnimatableBody2D"]
+polygon = PackedVector2Array(-60, -8, 59, -8, 62, -7, 64, -3, 64, 3, 60, 8, -60, 8, -64, 4, -64, -3, -62, -7)

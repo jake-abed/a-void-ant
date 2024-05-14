@@ -71,7 +71,7 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_lvxa8"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0.780392, 0.792157, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w36os"]
 gradient = SubResource("Gradient_lvxa8")

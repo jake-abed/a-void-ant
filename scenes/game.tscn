@@ -1,11 +1,79 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw4q3om30tfju"]
+[gd_scene load_steps=10 format=3 uid="uid://bw4q3om30tfju"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_controller.gd" id="1_0ndpu"]
-[ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void_room.tscn" id="1_7dq8o"]
+[ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void.tscn" id="1_7dq8o"]
 [ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="2_kjx0t"]
+[ext_resource type="PackedScene" uid="uid://djdkas1r5gow5" path="res://scenes/menus/pause_menu.tscn" id="4_xf4oo"]
+
+[sub_resource type="Gradient" id="Gradient_abu67"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s4r4d"]
+gradient = SubResource("Gradient_abu67")
+
+[sub_resource type="Animation" id="Animation_25c08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bu44n"]
+resource_name = "fade"
+length = 0.25
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_knhln"]
+_data = {
+"RESET": SubResource("Animation_25c08"),
+"fade": SubResource("Animation_bu44n")
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_0ndpu")
+
+[node name="FadeLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="FadeLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1159.0
+offset_bottom = 650.0
+texture = SubResource("GradientTexture1D_s4r4d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_knhln")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_xf4oo")]
+visible = false
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Void" parent="." instance=ExtResource("1_7dq8o")]
 
@@ -13,4 +81,5 @@ script = ExtResource("1_0ndpu")
 position = Vector2(522, 438)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.75, 1.75)
+limit_left = -100
