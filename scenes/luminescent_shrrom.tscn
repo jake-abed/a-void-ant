@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ram4jlled0l"]
+
+[ext_resource type="Texture2D" uid="uid://dcsj1hot7jhgq" path="res://assets/sprites/luminescent_shroom.png" id="1_mdtdt"]
+[ext_resource type="Script" path="res://assets/scripts/luminescent_shrrom.gd" id="2_88j84"]
+
+[sub_resource type="Gradient" id="Gradient_pqd20"]
+offsets = PackedFloat32Array(0.015625, 1)
+colors = PackedColorArray(0.635294, 0.654902, 1, 0.831373, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_crloo"]
+gradient = SubResource("Gradient_pqd20")
+fill = 1
+fill_from = Vector2(0.5, 0.4)
+fill_to = Vector2(0.854, 0.245)
+
+[node name="LuminescentShroom" type="Sprite2D"]
+texture = ExtResource("1_mdtdt")
+script = ExtResource("2_88j84")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_crloo")

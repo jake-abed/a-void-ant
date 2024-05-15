@@ -433,6 +433,7 @@ states/jump/position = Vector2(431, 133)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_07u5g"), "Move", "into_ball", SubResource("AnimationNodeStateMachineTransition_r6rai"), "into_ball", "from_ball", SubResource("AnimationNodeStateMachineTransition_byg66"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_y1mci"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_klnjy"), "from_ball", "Move", SubResource("AnimationNodeStateMachineTransition_dutl4")]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision_shape", "anim_player", "anim_tree", "ball_timer", "coyote_timer", "dash_timer", "room_timer", "ball_particles")]
+z_index = 1
 floor_block_on_wall = false
 script = ExtResource("1_6r08s")
 sprite = NodePath("Sprite2D")
@@ -455,7 +456,6 @@ texture = SubResource("GradientTexture2D_j5vgc")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_arn2e")
 hframes = 29
-frame = 5
 region_rect = Rect2(0, 0, 528, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -487,3 +487,6 @@ one_shot = true
 
 [node name="RoomChangeTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.55, 1.55)

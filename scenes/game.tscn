@@ -52,6 +52,9 @@ _data = {
 [node name="Game" type="Node2D"]
 script = ExtResource("1_0ndpu")
 
+[node name="Player" parent="." instance=ExtResource("2_kjx0t")]
+position = Vector2(522, 438)
+
 [node name="FadeLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="FadeLayer"]
@@ -75,11 +78,6 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Void" parent="." instance=ExtResource("1_7dq8o")]
+[node name="Level" type="Node" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("2_kjx0t")]
-position = Vector2(522, 438)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.75, 1.75)
-limit_left = -100
+[node name="Void" parent="Level" instance=ExtResource("1_7dq8o")]
