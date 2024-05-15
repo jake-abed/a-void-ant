@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://bmqfvbr8t4lq"]
+
+[ext_resource type="Script" path="res://scenes/characters/slime.gd" id="1_dqxji"]
+[ext_resource type="Texture2D" uid="uid://61exwykjlnvf" path="res://assets/sprites/standardslime.png" id="1_kmi1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmomd"]
+size = Vector2(44, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfov1"]
+atlas = ExtResource("1_kmi1k")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvgug"]
+atlas = ExtResource("1_kmi1k")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swq5w"]
+atlas = ExtResource("1_kmi1k")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwo07"]
+atlas = ExtResource("1_kmi1k")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7t7l5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfov1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvgug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swq5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwo07")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbc4c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfk7y"]
+size = Vector2(48, 49)
+
+[sub_resource type="Gradient" id="Gradient_btapy"]
+colors = PackedColorArray(0.580392, 1, 0.658824, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_teep0"]
+gradient = SubResource("Gradient_btapy")
+fill = 1
+fill_from = Vector2(0.5, 0.6)
+fill_to = Vector2(1, 0.146)
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "hurtbox")]
+script = ExtResource("1_dqxji")
+sprite = NodePath("AnimatedSprite2D")
+hitbox = NodePath("HitBox")
+hurtbox = NodePath("HurtBox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13.5)
+scale = Vector2(0.88, 1)
+shape = SubResource("RectangleShape2D_mmomd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7t7l5")
+frame_progress = 0.364069
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-1, 7)
+rotation = 1.5708
+scale = Vector2(1.6, 1.61032)
+shape = SubResource("CapsuleShape2D_gbc4c")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_hfk7y")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture2D_teep0")

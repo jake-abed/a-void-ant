@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://vi5jbjg63k3f"]
 
-[ext_resource type="Texture2D" uid="uid://rx6y8xcgx2ju" path="res://assets/sprites/dirt.png" id="1_030rx"]
+[ext_resource type="Texture2D" uid="uid://dr2hwglrypat2" path="res://assets/sprites/dirt.png" id="1_030rx"]
 [ext_resource type="Texture2D" uid="uid://b74qk3xk0fnnv" path="res://assets/sprites/mushroom_tiles.png" id="2_cpobs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xt1yp"]
@@ -54,6 +54,9 @@ texture_region_size = Vector2i(32, 32)
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 4, -16, 12, -12, 16, -4, 16, 16, -16, 16)
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wddsw"]
 texture = ExtResource("2_cpobs")

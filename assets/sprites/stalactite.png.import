@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr2hwglrypat2"
-path="res://.godot/imported/dirt.png-5963fb30b00db55d1658b2bd40704056.ctex"
+uid="uid://cle60c70pcley"
+path="res://.godot/imported/stalactite.png-624eb3e0248d814ff3a4a61ed9361fdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/dirt.png"
-dest_files=["res://.godot/imported/dirt.png-5963fb30b00db55d1658b2bd40704056.ctex"]
+source_file="res://assets/sprites/stalactite.png"
+dest_files=["res://.godot/imported/stalactite.png-624eb3e0248d814ff3a4a61ed9361fdb.ctex"]
 
 [params]
 

@@ -2,12 +2,14 @@ class_name GameController
 extends Node2D
 
 @onready var fade_player := $FadeLayer/AnimationPlayer
+@onready var player := $Player
 
 func _ready():
-	SceneManager.room_change.connect(_on_room_change)
+	SceneManager.room_change.connect(_fade_in)
+	player.respawn.connect(_fade_in)
 
 func _process(delta):
 	pass
 
-func _on_room_change() -> void:
-	fade_player.queue("fade")
+func _fade_in() -> void:
+	fade_player.play("fade")

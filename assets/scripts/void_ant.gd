@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+signal respawn
+
 const SPEED = 311.0
 const DASH_SPEED = 600.0
 const BALL_SPEED = 250.0
@@ -10,6 +12,8 @@ enum State {Normal, Void, Dash}
 
 var rooms_entered = 0
 
+@export var health: int = 3
+
 @export_group("Attached Nodes")
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
@@ -19,6 +23,7 @@ var rooms_entered = 0
 @export var coyote_timer: Timer
 @export var dash_timer: Timer
 @export var room_timer: Timer
+@export var invuln_timer: Timer
 @export var ball_particles: GPUParticles2D
 
 @export_group("Ability Values")
@@ -27,6 +32,7 @@ var rooms_entered = 0
 
 @onready var direction: Vector2 = Vector2.ZERO
 @onready var facing_factor := 1.0
+@onready var checkpoint: Vector2
 
 # In light of not using a state machine, these are the state bools
 @onready var grounded := false
@@ -36,6 +42,7 @@ var rooms_entered = 0
 @onready var can_jump := false
 @onready var can_dash := true
 @onready var dashing := false
+@onready var invuln := false
 
 @onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
 
@@ -45,11 +52,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready() -> void:
 	# Start the animation tree if it isn't running.
 	anim_tree.active = true
+	# Set starting checkpoint as current position
+	set_checkpoint(global_position)
 	# Connect all timers.
 	ball_timer.timeout.connect(_ball_timer_timeout)
 	coyote_timer.timeout.connect(_coyote_timer_timeout)
 	dash_timer.timeout.connect(_dash_timer_timeout)
 	room_timer.timeout.connect(_on_room_change_timeout)
+	invuln_timer.timeout.connect(_on_invuln_timeout)
 	SceneManager.room_change.connect(_on_room_change)
 
 func _process(delta):
@@ -140,9 +150,7 @@ func set_sprite_direction() -> void:
 	else: pass
 
 func dash() -> void:
-	print("TRYING TO DASH")
 	if can_dash:
-		print("DASHING")
 		can_dash = false
 		var tween := create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
@@ -166,10 +174,8 @@ func _ball_timer_timeout() -> void:
 		balled = false
 		can_ball = false
 		ball_timer.wait_time = 2.0
-		print("exiting ball, resetting timer")
 		ball_timer.start()
 	else:
-		print("Can ball again!")
 		ball_timer.wait_time = 1.0
 		can_ball = true
 
@@ -188,9 +194,23 @@ func _dash_timer_timeout() -> void:
 func _on_room_change_timeout() -> void:
 	can_change_rooms = true
 
+func _on_invuln_timeout() -> void:
+	invuln = false
+
 func _on_room_change() -> void:
 	can_change_rooms = false
 	room_timer.wait_time = 0.1
 	room_timer.start()
 	rooms_entered += 1
 
+func take_damage(amount: int) -> void:
+	if invuln:
+		return
+	invuln = true
+	invuln_timer.start()
+	respawn.emit()
+	health -= amount
+	global_position = checkpoint
+
+func set_checkpoint(pos: Vector2) -> void:
+	checkpoint = pos

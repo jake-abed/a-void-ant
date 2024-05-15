@@ -8,7 +8,6 @@ extends Sprite2D
 @onready var max_light_scale := randf_range(12.0, 14.0)
 
 func _ready():
-	print(light.scale)
 	light.energy = low_val
 	light.scale = Vector2(min_light_scale, min_light_scale)
 	modulate_light_strength()
