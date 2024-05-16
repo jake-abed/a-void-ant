@@ -26,9 +26,8 @@ func go_to_level(level: String, destination: String) -> void:
 		spawn_door_tag = destination
 		room_change.emit()
 		level_node.get_node(current_room).queue_free()
-		level_node.add_child(scene_to_load.instantiate())
+		var scene_instance := scene_to_load.instantiate()
+		level_node.call_deferred("add_child", scene_instance)
 		current_room = level
-		var marker = level_node.get_node(current_room + "/" + destination + "/Spawn")
+		var marker = scene_instance.get_node(destination + "/Spawn")
 		player.global_position = marker.global_position
-
-

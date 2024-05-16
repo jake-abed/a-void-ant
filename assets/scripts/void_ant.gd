@@ -107,6 +107,11 @@ func _physics_process(delta):
 		ball_particles.emitting = true
 		ball_timer.start()
 	
+	if invuln:
+		velocity.x = 0
+		move_and_slide()
+		return
+	
 	# Execute void ball y-movement.
 	if (balled):
 		direction.y = Input.get_axis("move_up", "move_down")
@@ -211,6 +216,7 @@ func take_damage(amount: int) -> void:
 	respawn.emit()
 	health -= amount
 	global_position = checkpoint
+	anim_states.travel("respawn")
 
 func set_checkpoint(pos: Vector2) -> void:
 	checkpoint = pos

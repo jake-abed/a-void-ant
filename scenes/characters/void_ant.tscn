@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://drmaskt8bgyd"]
+[gd_scene load_steps=33 format=3 uid="uid://drmaskt8bgyd"]
 
 [ext_resource type="Script" path="res://assets/scripts/void_ant.gd" id="1_6r08s"]
 [ext_resource type="Texture2D" uid="uid://diefjx3bii2q" path="res://assets/sprites/void-ant.png" id="1_arn2e"]
@@ -361,6 +361,70 @@ tracks/2/keys = {
 "values": [20, 21]
 }
 
+[sub_resource type="Animation" id="Animation_7y8hl"]
+resource_name = "respawn"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_arn2e")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [29]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 27, 26, 25, 24, 11, 23]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1.5, 7.49999)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9, 8), Vector2(21, 35)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l0pow"]
 _data = {
 "RESET": SubResource("Animation_rvo3j"),
@@ -369,6 +433,7 @@ _data = {
 "idle": SubResource("Animation_dtug6"),
 "into_ball": SubResource("Animation_8fsv4"),
 "jump": SubResource("Animation_uy1sq"),
+"respawn": SubResource("Animation_7y8hl"),
 "run": SubResource("Animation_3xipw")
 }
 
@@ -402,6 +467,9 @@ animation = &"into_ball"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_62o5v"]
 animation = &"jump"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nu6qg"]
+animation = &"respawn"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_07u5g"]
 advance_mode = 2
 
@@ -419,6 +487,10 @@ switch_mode = 1
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwc1e"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2fms2"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_0lkig")
 states/Move/position = Vector2(348, 45)
@@ -430,7 +502,9 @@ states/into_ball/node = SubResource("AnimationNodeAnimation_ug7wa")
 states/into_ball/position = Vector2(602, 27)
 states/jump/node = SubResource("AnimationNodeAnimation_62o5v")
 states/jump/position = Vector2(431, 133)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_07u5g"), "Move", "into_ball", SubResource("AnimationNodeStateMachineTransition_r6rai"), "into_ball", "from_ball", SubResource("AnimationNodeStateMachineTransition_byg66"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_y1mci"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_klnjy"), "from_ball", "Move", SubResource("AnimationNodeStateMachineTransition_dutl4")]
+states/respawn/node = SubResource("AnimationNodeAnimation_nu6qg")
+states/respawn/position = Vector2(322, 170)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_07u5g"), "Move", "into_ball", SubResource("AnimationNodeStateMachineTransition_r6rai"), "into_ball", "from_ball", SubResource("AnimationNodeStateMachineTransition_byg66"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_y1mci"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_klnjy"), "from_ball", "Move", SubResource("AnimationNodeStateMachineTransition_dutl4"), "respawn", "Move", SubResource("AnimationNodeStateMachineTransition_mwc1e")]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision_shape", "anim_player", "anim_tree", "ball_timer", "coyote_timer", "dash_timer", "room_timer", "invuln_timer", "ball_particles")]
 z_index = 1
@@ -457,7 +531,7 @@ texture = SubResource("GradientTexture2D_j5vgc")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_arn2e")
 hframes = 29
-frame = 7
+frame = 1
 region_rect = Rect2(0, 0, 528, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
