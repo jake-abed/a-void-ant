@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bmqfvbr8t4lq"]
 
-[ext_resource type="Script" path="res://scenes/characters/slime.gd" id="1_dqxji"]
 [ext_resource type="Texture2D" uid="uid://61exwykjlnvf" path="res://assets/sprites/standardslime.png" id="1_kmi1k"]
+[ext_resource type="Script" path="res://assets/scripts/slime.gd" id="1_n234u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mmomd"]
 size = Vector2(44, 25)
@@ -56,11 +56,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.6)
 fill_to = Vector2(1, 0.146)
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "hurtbox")]
-script = ExtResource("1_dqxji")
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "hurtbox", "ray")]
+script = ExtResource("1_n234u")
 sprite = NodePath("AnimatedSprite2D")
 hitbox = NodePath("HitBox")
 hurtbox = NodePath("HurtBox")
+ray = NodePath("RayCast2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.5)
@@ -89,3 +90,9 @@ shape = SubResource("RectangleShape2D_hfk7y")
 position = Vector2(0, -7)
 scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_teep0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(33, 34)
+target_position = Vector2(10, 0)
+hit_from_inside = true
+collide_with_areas = true
