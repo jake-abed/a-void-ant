@@ -12,7 +12,7 @@ enum State {Normal, Void, Dash}
 
 var rooms_entered = 0
 
-@export var health: int = 3
+@export var void_points: int = 5
 
 @export_group("Attached Nodes")
 @export var sprite: Sprite2D
@@ -25,6 +25,7 @@ var rooms_entered = 0
 @export var room_timer: Timer
 @export var invuln_timer: Timer
 @export var ball_particles: GPUParticles2D
+@export var dash_particles: GPUParticles2D
 
 @export_group("Ability Values")
 @export var movement_factor: float = 10.0
@@ -33,16 +34,22 @@ var rooms_entered = 0
 @onready var direction: Vector2 = Vector2.ZERO
 @onready var facing_factor := 1.0
 @onready var checkpoint: Vector2
+@onready var area: Area2D = $Area2D
+@onready var interactables: Array[Area2D] = []
 
 # In light of not using a state machine, these are the state bools
 @onready var grounded := false
 @onready var can_change_rooms := true
 @onready var balled := false
 @onready var can_ball := true
+@onready var ball_acquired := true
 @onready var can_jump := false
 @onready var can_dash := true
+@onready var dash_acquired := false
 @onready var dashing := false
 @onready var invuln := false
+@onready var shot_acquired := false
+@onready var can_shoot := false
 
 @onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
 
@@ -60,10 +67,17 @@ func _ready() -> void:
 	dash_timer.timeout.connect(_dash_timer_timeout)
 	room_timer.timeout.connect(_on_room_change_timeout)
 	invuln_timer.timeout.connect(_on_invuln_timeout)
+	
+	area.area_entered.connect(_on_area_entered)
+	area.area_exited.connect(_on_area_exited)
 	SceneManager.room_change.connect(_on_room_change)
 
 func _process(delta):
 	set_sprite_direction()
+	if Input.is_action_just_pressed("interact") && interactables.size() > 0:
+		if interactables[0] is Powerup:
+			enable_powerup(interactables[0].power)
+			interactables[0].give_power(self)
 
 func _physics_process(delta):
 	# Set the facing_factor to affect direction-based movements.
@@ -91,7 +105,7 @@ func _physics_process(delta):
 		grounded = false
 	
 	# Allow dash if possible.
-	if can_dash && !balled && Input.is_action_just_pressed("dash"):
+	if dash_acquired && can_dash && !balled && Input.is_action_just_pressed("dash"):
 		dash()
 	
 	# At this point, we know enough about player movement to set animations.
@@ -100,7 +114,7 @@ func _physics_process(delta):
 		anim_states.travel("Move")
 	
 	# Allow void ball ability.
-	if (balled == false && can_ball && Input.is_action_just_pressed("void_ball")):
+	if (balled == false && ball_acquired && can_ball && Input.is_action_just_pressed("void_ball")):
 		balled = true
 		can_ball = false
 		anim_states.travel("into_ball")
@@ -162,6 +176,7 @@ func dash() -> void:
 		dash_timer.wait_time = 0.25
 		dash_timer.start()
 		dashing = true
+		dash_particles.emitting = true
 		tween.tween_property(self, "dash_factor", 3.0, 0.125)
 		tween.tween_property(self, "dash_factor", 1.0, 0.125)
 	else:
@@ -214,9 +229,28 @@ func take_damage(amount: int) -> void:
 	invuln = true
 	invuln_timer.start()
 	respawn.emit()
-	health -= amount
+	void_points -= amount
 	global_position = checkpoint
 	anim_states.travel("respawn")
 
+func gain_void(amount: int) -> void:
+	void_points += amount
+
 func set_checkpoint(pos: Vector2) -> void:
 	checkpoint = pos
+
+# Interactions with Area2D entered and exited
+func _on_area_entered(area: Area2D) -> void:
+	if area is Powerup:
+		interactables.push_back(area)
+
+func _on_area_exited(area: Area2D) -> void:
+	if area is Powerup:
+		interactables.pop_front()
+
+func enable_powerup(name: String) -> void:
+	match name:
+		"dash":
+			dash_acquired = true
+		"ball":
+			ball_acquired = true

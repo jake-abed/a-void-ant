@@ -1,39 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://drmaskt8bgyd"]
+[gd_scene load_steps=34 format=3 uid="uid://drmaskt8bgyd"]
 
 [ext_resource type="Script" path="res://assets/scripts/void_ant.gd" id="1_6r08s"]
 [ext_resource type="Texture2D" uid="uid://diefjx3bii2q" path="res://assets/sprites/void-ant.png" id="1_arn2e"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4lxxh"]
-lifetime_randomness = 0.25
-particle_flag_align_y = true
-particle_flag_rotate_y = true
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(5, 5, 1)
-emission_shape = 1
-emission_sphere_radius = 1.0
-angle_min = -180.0
-angle_max = 180.0
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_min = 80.0
-initial_velocity_max = 100.0
-radial_velocity_min = -2.0
-radial_velocity_max = 2.0
-gravity = Vector3(0, 0, 0)
-damping_min = 50.0
-damping_max = 100.0
-
-[sub_resource type="Gradient" id="Gradient_4lcu7"]
-offsets = PackedFloat32Array(0.0974026, 0.318182, 0.480519, 1)
-colors = PackedColorArray(0.0901961, 0.113725, 0.235294, 1, 0.223529, 0.235294, 0.490196, 0.968627, 0, 0, 0, 0.494118, 0, 0, 0.0666667, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_j5vgc"]
-gradient = SubResource("Gradient_4lcu7")
-width = 8
-height = 8
-fill = 1
-fill_from = Vector2(0.509174, 0.513761)
-fill_to = Vector2(0.784404, 0.197248)
+[ext_resource type="Material" uid="uid://bm7qmio6wov8y" path="res://scenes/characters/void_particles.tres" id="2_ipf55"]
+[ext_resource type="Texture2D" uid="uid://cn4yox53rbvgt" path="res://scenes/characters/ball_particles.tres" id="3_2f5bg"]
+[ext_resource type="Texture2D" uid="uid://buurjcq8pr1dp" path="res://scenes/characters/dash_particles.tres" id="3_ddowf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pknb4"]
 size = Vector2(21, 35)
@@ -506,7 +477,10 @@ states/respawn/node = SubResource("AnimationNodeAnimation_nu6qg")
 states/respawn/position = Vector2(322, 170)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_07u5g"), "Move", "into_ball", SubResource("AnimationNodeStateMachineTransition_r6rai"), "into_ball", "from_ball", SubResource("AnimationNodeStateMachineTransition_byg66"), "Move", "jump", SubResource("AnimationNodeStateMachineTransition_y1mci"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_klnjy"), "from_ball", "Move", SubResource("AnimationNodeStateMachineTransition_dutl4"), "respawn", "Move", SubResource("AnimationNodeStateMachineTransition_mwc1e")]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision_shape", "anim_player", "anim_tree", "ball_timer", "coyote_timer", "dash_timer", "room_timer", "invuln_timer", "ball_particles")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dbjc"]
+size = Vector2(47, 36)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "collision_shape", "anim_player", "anim_tree", "ball_timer", "coyote_timer", "dash_timer", "room_timer", "invuln_timer", "ball_particles", "dash_particles")]
 z_index = 1
 floor_block_on_wall = false
 script = ExtResource("1_6r08s")
@@ -520,18 +494,30 @@ dash_timer = NodePath("DashTimer")
 room_timer = NodePath("RoomChangeTimer")
 invuln_timer = NodePath("InvulnTimer")
 ball_particles = NodePath("VoidBallParticles")
+dash_particles = NodePath("DashParticles")
 
 [node name="VoidBallParticles" type="GPUParticles2D" parent="."]
 scale = Vector2(0.5, 0.5)
 emitting = false
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_4lxxh")
-texture = SubResource("GradientTexture2D_j5vgc")
+process_material = ExtResource("2_ipf55")
+texture = ExtResource("3_2f5bg")
+one_shot = true
+
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 24
+process_material = ExtResource("2_ipf55")
+texture = ExtResource("3_ddowf")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_arn2e")
 hframes = 29
-frame = 6
+frame = 4
 region_rect = Rect2(0, 0, 528, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -569,3 +555,9 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_6dbjc")

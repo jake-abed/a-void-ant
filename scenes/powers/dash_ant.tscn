@@ -1,15 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxb4aacgkjs7f"]
 
 [ext_resource type="Texture2D" uid="uid://b08ef0tvhkyf8" path="res://assets/sprites/dash-ant.png" id="1_sntjk"]
+[ext_resource type="PackedScene" uid="uid://d1v4gl6mcq8lr" path="res://powerup.tscn" id="2_8k3hq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dfng"]
-size = Vector2(88, 35)
-
-[node name="DashAnt" type="Area2D"]
+[node name="DashAnt" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sntjk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_8dfng")
+[node name="Powerup" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_8k3hq")]
+position = Vector2(0, 7)
+parent = NodePath("..")
+power = "dash"
