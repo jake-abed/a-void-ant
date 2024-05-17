@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal respawn
+signal update_health(health: String)
 
 const SPEED = 311.0
 const DASH_SPEED = 600.0
@@ -45,7 +46,7 @@ var rooms_entered = 0
 @onready var ball_acquired := true
 @onready var can_jump := false
 @onready var can_dash := true
-@onready var dash_acquired := false
+@onready var dash_acquired := true
 @onready var dashing := false
 @onready var invuln := false
 @onready var shot_acquired := false

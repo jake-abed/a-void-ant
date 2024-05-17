@@ -11,6 +11,4 @@ func despawn_collected() -> void:
 	for key in room_contents:
 		var should_spawn: bool = room_contents[key]
 		if !should_spawn:
-			print(key)
-			print(get_node(key))
 			get_node(key).queue_free()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://cl314nryllxp1"]
+[gd_scene load_steps=20 format=3 uid="uid://cl314nryllxp1"]
 
 [ext_resource type="Texture2D" uid="uid://dr2hwglrypat2" path="res://assets/sprites/dirt.png" id="1_0d2b5"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="1_85rke"]
+[ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_dhvtw"]
 [ext_resource type="Texture2D" uid="uid://b74qk3xk0fnnv" path="res://assets/sprites/mushroom_tiles.png" id="2_6ay3l"]
 [ext_resource type="Texture2D" uid="uid://brtfhpbn8l3x2" path="res://assets/sprites/cave_tiles.png" id="3_e6pf2"]
 [ext_resource type="PackedScene" uid="uid://5ram4jlled0l" path="res://scenes/luminescent_shroom.tscn" id="5_vw4nf"]
@@ -165,6 +166,7 @@ size = Vector2(64, 75.5)
 size = Vector2(330, 192)
 
 [node name="Cave" type="Node2D"]
+script = ExtResource("1_dhvtw")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)

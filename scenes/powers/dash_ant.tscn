@@ -10,5 +10,5 @@ texture = ExtResource("1_sntjk")
 
 [node name="Powerup" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_8k3hq")]
 position = Vector2(0, 7)
-parent = NodePath("..")
 power = "dash"
+parent = NodePath("..")

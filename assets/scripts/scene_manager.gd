@@ -9,11 +9,11 @@ signal room_change
 
 var spawns := {
 	"Void": {},
-	"Hills": {
-		"Slime": true,
-		"Slime2": true,
-		"pellet": true,
-	}
+	"Hills": {},
+	"Hills2": {},
+	"Cave": {},
+	"Cave2": {},
+	"Cave3": {}
 }
 
 var spawn_door_tag: String
@@ -44,6 +44,5 @@ func go_to_level(level: String, destination: String) -> void:
 		var marker = scene_instance.get_node(destination + "/Spawn")
 		player.global_position = marker.global_position
 
-func set_collected(room: String, name: String) -> void:
-	spawns[room][name] = false
-	print(spawns[room])
+func set_collected(name: String) -> void:
+	spawns[current_room][name] = false

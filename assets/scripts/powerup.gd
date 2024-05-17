@@ -27,10 +27,11 @@ func give_power(player: Player) -> void:
 	label.visible = false
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_trans(Tween.TRANS_SPRING)
 	tween.set_parallel()
 	
-	tween.tween_property(parent, "scale", Vector2(0,0), 0.5)
-	tween.tween_property(parent, "global_position", player.global_position, 0.5)
+	tween.tween_property(parent, "scale", Vector2(0,0), 0.35)
+	tween.tween_property(parent, "global_position", player.global_position, 0.25)
 	await tween.finished
+	SceneManager.set_collected(parent.name)
 	parent.queue_free()
