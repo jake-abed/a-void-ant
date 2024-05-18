@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://mvts1u0fvq20"]
+[gd_scene load_steps=42 format=3 uid="uid://mvts1u0fvq20"]
 
 [ext_resource type="PackedScene" uid="uid://vi5jbjg63k3f" path="res://scenes/tile_map.tscn" id="1_8on6u"]
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_nv0ls"]
@@ -7,8 +7,9 @@
 [ext_resource type="Script" path="res://assets/scripts/moving_platform.gd" id="5_6ha7v"]
 [ext_resource type="Script" path="res://assets/scripts/checkpoint.gd" id="5_10dd8"]
 [ext_resource type="Texture2D" uid="uid://ddmf118wuplto" path="res://assets/sprites/platform.png" id="6_qeak8"]
-[ext_resource type="PackedScene" uid="uid://cyew2e48g5j0s" path="res://frog.tscn" id="9_lgoo2"]
-[ext_resource type="PackedScene" uid="uid://bq7x7w42p5mmn" path="res://pellet.tscn" id="9_uhvpt"]
+[ext_resource type="PackedScene" uid="uid://cyew2e48g5j0s" path="res://scenes/characters/frog.tscn" id="8_2ycul"]
+[ext_resource type="PackedScene" uid="uid://bq7x7w42p5mmn" path="res://scenes/pellet.tscn" id="9_ygp3d"]
+[ext_resource type="AudioStream" uid="uid://bmkklcw24nbsc" path="res://assets/audio/void-ant-standard.wav" id="10_1neec"]
 
 [sub_resource type="Curve2D" id="Curve2D_jfv56"]
 _data = {
@@ -310,6 +311,9 @@ size = Vector2(64, 75.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sve6h"]
 size = Vector2(64, 160)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_loq20"]
+size = Vector2(330, 192)
+
 [node name="Hills" type="Node2D"]
 position = Vector2(616, 264)
 script = ExtResource("1_nv0ls")
@@ -549,77 +553,93 @@ shape = SubResource("RectangleShape2D_sve6h")
 [node name="Spawn" type="Marker2D" parent="HillsEast"]
 position = Vector2(96, 72)
 
-[node name="Frog" parent="." instance=ExtResource("9_lgoo2")]
+[node name="Frog" parent="." instance=ExtResource("8_2ycul")]
 position = Vector2(184, 88)
 
-[node name="Pellet" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(-336, 8)
 
-[node name="Pellet2" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet2" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1104, -248)
 
-[node name="Pellet3" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet3" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1912, -624)
 
-[node name="Pellet4" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet4" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(704, -624)
 
-[node name="Pellet5" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet5" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(640, -624)
 
-[node name="Pellet6" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet6" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(576, -624)
 
-[node name="Pellet7" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet7" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(4120, -720)
 
-[node name="Pellet8" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet8" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(4280, -1312)
 
-[node name="Pellet9" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet9" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(4232, -1312)
 
-[node name="Pellet10" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet10" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(4184, -1312)
 
-[node name="Pellet11" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet11" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(-664, -1488)
 
-[node name="Pellet12" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet12" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(-616, -1488)
 
-[node name="Pellet13" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet13" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(-568, -1488)
 
-[node name="Pellet14" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet14" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(3064, -728)
 
-[node name="Pellet15" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet15" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1688, -1424)
 
-[node name="Pellet16" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet16" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1752, -1424)
 
-[node name="Pellet17" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet17" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1816, -1424)
 
-[node name="Pellet18" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet18" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1880, -1424)
 
-[node name="Pellet19" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet19" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(1944, -1424)
 
-[node name="Pellet20" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet20" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(2008, -1424)
 
-[node name="Pellet21" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet21" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(2072, -1424)
 
-[node name="Pellet22" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet22" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(2984, -1600)
 
-[node name="Pellet23" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet23" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(2936, -1600)
 
-[node name="Pellet24" parent="." instance=ExtResource("9_uhvpt")]
+[node name="Pellet24" parent="." instance=ExtResource("9_ygp3d")]
 position = Vector2(2888, -1600)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_1neec")
+volume_db = -16.0
+autoplay = true
+
+[node name="Checkpoint2" type="Area2D" parent="." node_paths=PackedStringArray("marker")]
+position = Vector2(1576, -696)
+script = ExtResource("5_10dd8")
+marker = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
+shape = SubResource("RectangleShape2D_loq20")
+
+[node name="Marker2D" type="Marker2D" parent="Checkpoint2"]
+position = Vector2(0, 72)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxb4aacgkjs7f"]
 
 [ext_resource type="Texture2D" uid="uid://b08ef0tvhkyf8" path="res://assets/sprites/dash-ant.png" id="1_sntjk"]
-[ext_resource type="PackedScene" uid="uid://d1v4gl6mcq8lr" path="res://powerup.tscn" id="2_8k3hq"]
+[ext_resource type="PackedScene" uid="uid://d1v4gl6mcq8lr" path="res://scenes/powerup.tscn" id="2_8k3hq"]
 
 [node name="DashAnt" type="Node2D"]
 
@@ -10,5 +10,5 @@ texture = ExtResource("1_sntjk")
 
 [node name="Powerup" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_8k3hq")]
 position = Vector2(0, 7)
-power = "dash"
 parent = NodePath("..")
+power = "dash"

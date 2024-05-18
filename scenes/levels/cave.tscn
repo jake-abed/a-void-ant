@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cl314nryllxp1"]
+[gd_scene load_steps=21 format=3 uid="uid://cl314nryllxp1"]
 
 [ext_resource type="Texture2D" uid="uid://dr2hwglrypat2" path="res://assets/sprites/dirt.png" id="1_0d2b5"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="1_85rke"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dyfvkfhpq8ow7" path="res://scenes/stalactite.tscn" id="9_22fco"]
 [ext_resource type="PackedScene" uid="uid://bmqfvbr8t4lq" path="res://scenes/characters/slime.tscn" id="10_12xeu"]
 [ext_resource type="Script" path="res://assets/scripts/checkpoint.gd" id="10_s3mkm"]
+[ext_resource type="AudioStream" uid="uid://b4jo51p4gu0p1" path="res://assets/audio/void-ant-cave-theme.wav" id="12_3xt8a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xt1yp"]
 
@@ -344,3 +345,8 @@ shape = SubResource("RectangleShape2D_fl22j")
 
 [node name="Marker2D" type="Marker2D" parent="Checkpoint"]
 position = Vector2(47, 87)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_3xt8a")
+volume_db = -15.0
+autoplay = true

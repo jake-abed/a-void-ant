@@ -27,6 +27,8 @@ var rooms_entered = 0
 @export var invuln_timer: Timer
 @export var ball_particles: GPUParticles2D
 @export var dash_particles: GPUParticles2D
+@export var jump_audio: AudioStreamPlayer2D
+@export var ball_audio: AudioStreamPlayer2D
 
 @export_group("Ability Values")
 @export var movement_factor: float = 10.0
@@ -119,6 +121,7 @@ func _physics_process(delta):
 		balled = true
 		can_ball = false
 		anim_states.travel("into_ball")
+		ball_audio.play()
 		ball_particles.emitting = true
 		ball_timer.start()
 	
@@ -140,6 +143,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and can_jump and !balled:
 		grounded = false
 		can_jump = false
+		jump_audio.play()
 		anim_states.travel("jump")
 		velocity.y += JUMP_VELOCITY
 		if dashing:
@@ -172,6 +176,8 @@ func set_sprite_direction() -> void:
 func dash() -> void:
 	if can_dash:
 		can_dash = false
+		ball_audio.pitch_scale = 4
+		ball_audio.play()
 		var tween := create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		dash_timer.wait_time = 0.25
@@ -194,6 +200,7 @@ func _ball_timer_timeout() -> void:
 		anim_states.travel("from_ball")
 		balled = false
 		can_ball = false
+		ball_audio.stop()
 		ball_timer.wait_time = 2.0
 		ball_timer.start()
 	else:
@@ -206,6 +213,8 @@ func _coyote_timer_timeout() -> void:
 func _dash_timer_timeout() -> void:
 	if dashing:
 		dashing = false
+		ball_audio.stop()
+		ball_audio.pitch_scale = 0.75
 		dash_timer.wait_time = 1.2
 		dash_timer.start()
 	else:

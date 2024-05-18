@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmxpx8q4xd4lr"]
+[gd_scene load_steps=16 format=3 uid="uid://bmxpx8q4xd4lr"]
 
 [ext_resource type="Texture2D" uid="uid://dh5rk8yggcgqf" path="res://assets/sprites/void-block.png" id="1_00r8l"]
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_bllim"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://di2o188w8bxi1" path="res://assets/sprites/void-nebula.png" id="4_ng62j"]
 [ext_resource type="Texture2D" uid="uid://bpeo306muubj4" path="res://assets/sprites/void-stars.png" id="5_ny1ii"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="6_123sd"]
+[ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="8_2j5do"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_83d3l"]
 
@@ -118,3 +119,8 @@ scale = Vector2(2.25, 1.26562)
 energy = 1.5
 blend_mode = 2
 texture = SubResource("GradientTexture2D_iriak")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_2j5do")
+volume_db = -18.0
+autoplay = true
