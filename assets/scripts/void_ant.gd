@@ -14,11 +14,10 @@ const INERTIA := 0.4
 
 enum State {Normal, Void, Dash}
 
-var rooms_entered = 0
-
 @export var void_points: int = 1
 
 @export_group("Attached Nodes")
+@export var game: Node2D
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 @export var anim_player: AnimationPlayer
@@ -44,6 +43,7 @@ var rooms_entered = 0
 @onready var checkpoint: Vector2
 @onready var area: Area2D = $Area2D
 @onready var camera: Camera2D = $Camera2D
+@onready var offer_void_label := $OfferVoidLabel
 @onready var interactables: Array[Area2D] = []
 
 # In light of not using a state machine, these are the state bools
@@ -51,15 +51,17 @@ var rooms_entered = 0
 @onready var can_change_rooms := true
 @onready var balled := false
 @onready var can_ball := true
-@onready var ball_acquired := true
+@onready var ball_acquired := false
 @onready var can_jump := false
 @onready var can_dash := true
-@onready var dash_acquired := true
+@onready var dash_acquired := false
 @onready var dashing := false
 @onready var invuln := false
 @onready var shot_acquired := false
 @onready var can_shoot := false
+@onready var can_offer_void := false
 
+@onready var fade_player := $"../FadeLayer/AnimationPlayer"
 @onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -88,6 +90,8 @@ func _process(delta):
 		if interactables[0] is Powerup:
 			enable_powerup(interactables[0].power)
 			interactables[0].give_power(self)
+		if interactables[0].name == "TheVoid" && can_offer_void:
+			offer_void()
 
 func _physics_process(delta):
 	# Set the facing_factor to affect direction-based movements.
@@ -240,7 +244,6 @@ func _on_room_change() -> void:
 	can_change_rooms = false
 	room_timer.wait_time = 0.1
 	room_timer.start()
-	rooms_entered += 1
 
 func take_damage(amount: int) -> void:
 	if invuln:
@@ -249,6 +252,10 @@ func take_damage(amount: int) -> void:
 	invuln_timer.start()
 	respawn.emit()
 	void_points -= amount
+	if void_points >= 25:
+		can_offer_void = true
+	else:
+		can_offer_void = false
 	update_void_points.emit(void_points)
 	print(void_points)
 	global_position = checkpoint
@@ -256,6 +263,10 @@ func take_damage(amount: int) -> void:
 
 func gain_void(amount: int) -> void:
 	void_points += amount
+	if void_points >= 25:
+		can_offer_void = true
+	else:
+		can_offer_void = false
 	update_void_points.emit(void_points)
 
 func set_checkpoint(pos: Vector2) -> void:
@@ -265,9 +276,15 @@ func set_checkpoint(pos: Vector2) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Powerup:
 		interactables.push_back(area)
+	if area.name == "TheVoid":
+		toggle_offering_void()
+		interactables.push_back(area)
 
 func _on_area_exited(area: Area2D) -> void:
 	if area is Powerup:
+		interactables.pop_front()
+	if area.name == "TheVoid":
+		toggle_offering_void()
 		interactables.pop_front()
 
 func enable_powerup(name: String) -> void:
@@ -292,3 +309,25 @@ func return_to_checkpoint() -> void:
 	invuln_timer.start()
 	global_position = checkpoint
 	anim_states.travel("respawn")
+
+func toggle_offering_void() -> void:
+	print("Toggling void offering")
+	if can_offer_void:
+		offer_void_label.text = "OFFER  VOID\nENERGY?"
+	else :
+		offer_void_label.text = "NEED  MORE\nVOID  ENERGY"
+	offer_void_label.visible = !offer_void_label.visible
+
+func offer_void() -> void:
+	if void_points < 25:
+		return
+	fade_player.play("fade_out")
+	await fade_player.animation_finished
+	if void_points >= 25 && void_points < 50:
+		get_tree().change_scene_to_file("res://scenes/okay_ending.tscn")
+	if void_points >= 50 && void_points < 100:
+		get_tree().change_scene_to_file("res://scenes/good_ending.tscn")
+	if void_points >= 100:
+		get_tree().change_scene_to_file("res://scenes/great_ending.tscn")
+	else:
+		return

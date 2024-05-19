@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl6l0mnqckir7"]
+[gd_scene load_steps=12 format=3 uid="uid://cl6l0mnqckir7"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_k4qa0"]
 [ext_resource type="PackedScene" uid="uid://ch34jgllbolip" path="res://scenes/cave_tile_map.tscn" id="2_2pg0t"]
@@ -8,9 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://dssr1rupbv0px" path="res://scenes/magma_shroom.tscn" id="6_137i4"]
 [ext_resource type="PackedScene" uid="uid://bq7x7w42p5mmn" path="res://scenes/pellet.tscn" id="8_n6bww"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="8_pyn6a"]
+[ext_resource type="Script" path="res://assets/scripts/checkpoint.gd" id="9_xeg1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sve6h"]
 size = Vector2(64, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fl22j"]
+size = Vector2(330, 192)
 
 [node name="Cave4" type="Node2D"]
 script = ExtResource("1_k4qa0")
@@ -44,6 +48,8 @@ texture = ExtResource("5_2d8og")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qh04v")
+volume_db = -15.0
+autoplay = true
 
 [node name="MagmaShroom" parent="." instance=ExtResource("6_137i4")]
 position = Vector2(1608, 312)
@@ -345,3 +351,14 @@ shape = SubResource("RectangleShape2D_sve6h")
 
 [node name="Spawn" type="Marker2D" parent="Cave4East"]
 position = Vector2(-104, 64)
+
+[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("marker")]
+position = Vector2(3136, 248)
+script = ExtResource("9_xeg1v")
+marker = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+shape = SubResource("RectangleShape2D_fl22j")
+
+[node name="Marker2D" type="Marker2D" parent="Checkpoint"]
+position = Vector2(-64, 64)

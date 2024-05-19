@@ -31,3 +31,4 @@ func adjust_lighting() -> void:
 	tween.tween_property(light, "energy", 1.4, 1.5)
 	tween.tween_property(light, "energy", 1.1, 1.5)
 	tween.set_loops()
+	

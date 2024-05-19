@@ -37,6 +37,8 @@ layer_0/tile_data = PackedInt32Array(-2424844, 3, 0, -2359308, 3, 0, -2293772, 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_8qpa6")
+volume_db = -15.0
+autoplay = true
 
 [node name="CaveBackground" parent="." instance=ExtResource("3_msdvb")]
 scroll_offset = Vector2(-1735.05, -99.1486)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://ceknn6f65doc7"]
 
-[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_bvvii"]
+[ext_resource type="Script" path="res://assets/scripts/main_menu.gd" id="1_f4xu5"]
 [ext_resource type="PackedScene" uid="uid://c1jrqfbypyw2" path="res://scenes/void_bg.tscn" id="1_sw8eu"]
 [ext_resource type="LabelSettings" uid="uid://d00c388mb34q" path="res://assets/theme/subtitle_label.tres" id="2_densr"]
 [ext_resource type="Script" path="res://assets/scripts/the_void.gd" id="3_mrysw"]
@@ -126,7 +126,7 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_next = NodePath("VBoxContainer/Start")
 focus_previous = NodePath("VBoxContainer/Controls")
-script = ExtResource("1_bvvii")
+script = ExtResource("1_f4xu5")
 
 [node name="VoidBg" parent="." instance=ExtResource("1_sw8eu")]
 
@@ -135,7 +135,7 @@ layout_mode = 0
 offset_top = 93.0
 offset_right = 1275.0
 offset_bottom = 177.0
-text = "KOKu"
+text = "KOKU"
 label_settings = SubResource("LabelSettings_xfs3a")
 horizontal_alignment = 1
 
@@ -149,16 +149,6 @@ text = "A VOID ANT"
 label_settings = ExtResource("2_densr")
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="."]
-layout_mode = 0
-offset_left = 707.0
-offset_top = 11.0
-offset_right = 770.0
-offset_bottom = 143.0
-text = "-"
-label_settings = SubResource("LabelSettings_xfs3a")
-horizontal_alignment = 1
-
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
 offset_left = -6.0
@@ -166,7 +156,7 @@ offset_top = 589.0
 offset_right = 1269.0
 offset_bottom = 692.0
 text = "A GAME BY JAKE ABED
-CREATED FOR GODOT WILD JAM # 69"
+CREATED FOR GODOT WILD JAM  69"
 label_settings = ExtResource("4_d60gb")
 horizontal_alignment = 1
 
@@ -217,6 +207,7 @@ offset_top = 279.0
 offset_right = 805.0
 offset_bottom = 517.0
 theme = ExtResource("6_wpebu")
+alignment = 1
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -227,6 +218,7 @@ theme_type_variation = &"FlatButton"
 text = "START"
 
 [node name="Controls" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 focus_previous = NodePath("../Start")
 text = "CONTROLS"

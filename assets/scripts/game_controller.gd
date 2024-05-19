@@ -10,6 +10,7 @@ extends Node2D
 @onready var void_ball_available_label := $UI/CanvasLayer/HBoxContainer/VoidBallPanel/VoidBallAvailableLabel
 
 func _ready():
+	fade_player.play("fade")
 	SceneManager.room_change.connect(_fade_in)
 	player.respawn.connect(_fade_in)
 	player.update_void_points.connect(_on_update_void_points)
@@ -21,6 +22,8 @@ func _process(delta):
 	pass
 
 func _fade_in() -> void:
+	if player.void_points <= 0:
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/lose.tscn")
 	fade_player.play("fade")
 
 func _on_update_void_points(points: int) -> void:
@@ -53,3 +56,6 @@ func _on_power_used(power: String) -> void:
 		"ball":
 			void_ball_available_label.text = "UNAVAILABLE"
 			void_ball_panel.self_modulate.a = 0.1
+
+func fade_out() -> void:
+	fade_player.play("fade_out")

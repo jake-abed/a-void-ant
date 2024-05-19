@@ -1,11 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://mu5ypckvkuvy"]
+[gd_scene load_steps=18 format=3 uid="uid://1ncnyv2dn3ny"]
 
-[ext_resource type="Script" path="res://assets/scripts/intro.gd" id="1_2hd87"]
-[ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void.tscn" id="1_hop6p"]
-[ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="2_pk6y3"]
-[ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="3_t02fl"]
-[ext_resource type="LabelSettings" uid="uid://blqsoq6mvs6eb" path="res://assets/theme/dialog_text.tres" id="4_o8ef8"]
-[ext_resource type="Texture2D" uid="uid://diefjx3bii2q" path="res://assets/sprites/void-ant.png" id="6_xn888"]
+[ext_resource type="Script" path="res://assets/scripts/lose.gd" id="1_33py5"]
+[ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void.tscn" id="2_kw2xw"]
+[ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="3_4qw0k"]
+[ext_resource type="LabelSettings" uid="uid://blqsoq6mvs6eb" path="res://assets/theme/dialog_text.tres" id="4_krlpn"]
+[ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="6_5msy5"]
 
 [sub_resource type="Animation" id="Animation_m8a0s"]
 length = 0.001
@@ -31,12 +30,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xwpg6"]
 resource_name = "fade_in"
-length = 1.75
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,7 +43,7 @@ tracks/0/path = NodePath("../ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.7),
+"times": PackedFloat32Array(0.4, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -119,7 +118,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_22rd8"]
 resource_name = "line_one"
-length = 4.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,10 +126,10 @@ tracks/0/path = NodePath("Dialog:visible_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.2, 3, 4),
+"times": PackedFloat32Array(0, 1.9, 3.2, 6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.57, 0.666667, 1.0]
+"values": [0.0, 0.27, 0.33, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_yge0p"]
@@ -169,7 +168,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_phql2"]
 resource_name = "line_three"
-length = 9.0
+length = 1.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -178,10 +177,10 @@ tracks/0/path = NodePath("Dialog:visible_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.2, 3, 3.65, 4.45, 5.9, 6.8, 7.75, 8.45, 9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.37, 0.4, 0.55, 0.58, 0.76, 0.8, 0.915152, 0.915152, 1.0]
+"values": [0.0, 0.6, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_c8okq"]
@@ -215,102 +214,10 @@ _data = {
 "line_two": SubResource("Animation_c8okq")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6vto"]
-atlas = ExtResource("6_xn888")
-region = Rect2(0, 0, 48, 36)
+[node name="Lose" type="Node2D"]
+script = ExtResource("1_33py5")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i4fkd"]
-atlas = ExtResource("6_xn888")
-region = Rect2(48, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dhrr1"]
-atlas = ExtResource("6_xn888")
-region = Rect2(96, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3addd"]
-atlas = ExtResource("6_xn888")
-region = Rect2(144, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sghj8"]
-atlas = ExtResource("6_xn888")
-region = Rect2(192, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_amevx"]
-atlas = ExtResource("6_xn888")
-region = Rect2(240, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o71qg"]
-atlas = ExtResource("6_xn888")
-region = Rect2(288, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b611r"]
-atlas = ExtResource("6_xn888")
-region = Rect2(336, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_omvxk"]
-atlas = ExtResource("6_xn888")
-region = Rect2(384, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ofjme"]
-atlas = ExtResource("6_xn888")
-region = Rect2(432, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yp1l8"]
-atlas = ExtResource("6_xn888")
-region = Rect2(480, 0, 48, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mp7we"]
-atlas = ExtResource("6_xn888")
-region = Rect2(528, 0, 48, 36)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2ufni"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s6vto")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i4fkd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dhrr1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3addd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sghj8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_amevx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o71qg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b611r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_omvxk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ofjme")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yp1l8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mp7we")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
-
-[node name="Intro" type="Node2D"]
-script = ExtResource("1_2hd87")
-
-[node name="Void" parent="." instance=ExtResource("1_hop6p")]
+[node name="Void" parent="." instance=ExtResource("2_kw2xw")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -325,7 +232,7 @@ offset_left = 25.0
 offset_top = 487.0
 offset_right = 1254.0
 offset_bottom = 688.0
-theme = ExtResource("2_pk6y3")
+theme = ExtResource("3_4qw0k")
 
 [node name="Dialog" type="Label" parent="Control/CanvasLayer/Panel"]
 layout_mode = 0
@@ -333,8 +240,8 @@ offset_left = 31.0
 offset_top = 38.0
 offset_right = 1042.0
 offset_bottom = 161.0
-text = "Nothing  believes  in  you...  go  forth  and  fill  nothing  with  rainbow  light!"
-label_settings = ExtResource("4_o8ef8")
+text = "Oops..."
+label_settings = ExtResource("4_krlpn")
 autowrap_mode = 3
 visible_characters = 0
 visible_ratio = 0.0
@@ -345,7 +252,7 @@ offset_left = 1072.0
 offset_top = 127.0
 offset_right = 1216.0
 offset_bottom = 189.0
-theme = ExtResource("2_pk6y3")
+theme = ExtResource("3_4qw0k")
 theme_type_variation = &"FlatButton"
 text = "      CONTINUE      "
 
@@ -358,14 +265,9 @@ libraries = {
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(519, 442)
-sprite_frames = SubResource("SpriteFrames_2ufni")
-flip_h = true
+color = Color(0, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_t02fl")
+stream = ExtResource("6_5msy5")
 volume_db = -15.0
 autoplay = true

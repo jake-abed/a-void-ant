@@ -14,7 +14,6 @@
 [ext_resource type="AudioStream" uid="uid://b4jo51p4gu0p1" path="res://assets/audio/void-ant-cave-theme.wav" id="12_3xt8a"]
 [ext_resource type="PackedScene" uid="uid://bq7x7w42p5mmn" path="res://scenes/pellet.tscn" id="13_8lf18"]
 [ext_resource type="PackedScene" uid="uid://cyew2e48g5j0s" path="res://scenes/characters/frog.tscn" id="14_5q1gs"]
-[ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="15_ve2ld"]
 [ext_resource type="PackedScene" uid="uid://bt8tpiqaso0s3" path="res://scenes/cave_moving_platform.tscn" id="16_x60r6"]
 [ext_resource type="PackedScene" uid="uid://dssr1rupbv0px" path="res://scenes/magma_shroom.tscn" id="17_ve8os"]
 
@@ -192,6 +191,9 @@ size = Vector2(160, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogbnq"]
 size = Vector2(352, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06cg3"]
+size = Vector2(1077, 192)
 
 [node name="Cave" type="Node2D"]
 script = ExtResource("1_dhvtw")
@@ -444,9 +446,6 @@ position = Vector2(-832, 216)
 position = Vector2(-1056, -72)
 rotation = 3.14159
 
-[node name="Player" parent="." instance=ExtResource("15_ve2ld")]
-position = Vector2(-648, 120)
-
 [node name="Slime2" parent="." instance=ExtResource("10_12xeu")]
 position = Vector2(-2168, 464)
 
@@ -634,3 +633,15 @@ position = Vector2(-2784, 344)
 
 [node name="Pellet16" parent="." instance=ExtResource("13_8lf18")]
 position = Vector2(-2736, 336)
+
+[node name="Checkpoint5" type="Area2D" parent="." node_paths=PackedStringArray("marker")]
+position = Vector2(-6008, 1800)
+script = ExtResource("10_s3mkm")
+marker = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint5"]
+position = Vector2(373.5, 0)
+shape = SubResource("RectangleShape2D_06cg3")
+
+[node name="Marker2D" type="Marker2D" parent="Checkpoint5"]
+position = Vector2(840, -48)
