@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cl6l0mnqckir7"]
+[gd_scene load_steps=10 format=3 uid="uid://cl6l0mnqckir7"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_k4qa0"]
 [ext_resource type="PackedScene" uid="uid://ch34jgllbolip" path="res://scenes/cave_tile_map.tscn" id="2_2pg0t"]
@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://b4jo51p4gu0p1" path="res://assets/audio/void-ant-cave-theme.wav" id="4_qh04v"]
 [ext_resource type="Texture2D" uid="uid://2xwttps6n3cn" path="res://assets/sprites/magma-stal.png" id="5_2d8og"]
 [ext_resource type="PackedScene" uid="uid://dssr1rupbv0px" path="res://scenes/magma_shroom.tscn" id="6_137i4"]
-[ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="7_h38um"]
 [ext_resource type="PackedScene" uid="uid://bq7x7w42p5mmn" path="res://scenes/pellet.tscn" id="8_n6bww"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="8_pyn6a"]
 
@@ -70,9 +69,6 @@ rotation = 3.14159
 
 [node name="MagmaShroom7" parent="." instance=ExtResource("6_137i4")]
 position = Vector2(952, 504)
-
-[node name="Player" parent="." instance=ExtResource("7_h38um")]
-position = Vector2(2816, 304)
 
 [node name="MagmaShroom8" parent="." instance=ExtResource("6_137i4")]
 position = Vector2(2680, 312)
@@ -336,7 +332,7 @@ position = Vector2(968, 320)
 [node name="Pellet84" parent="." instance=ExtResource("8_n6bww")]
 position = Vector2(968, 280)
 
-[node name="Portal" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
+[node name="Cave4East" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
 position = Vector2(3392, 248)
 script = ExtResource("8_pyn6a")
 target_room = "Cave"
@@ -344,8 +340,8 @@ target_location = "CaveBottomWest"
 collision_shape = NodePath("CollisionShape2D")
 spawn = NodePath("Spawn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cave4East"]
 shape = SubResource("RectangleShape2D_sve6h")
 
-[node name="Spawn" type="Marker2D" parent="Portal"]
+[node name="Spawn" type="Marker2D" parent="Cave4East"]
 position = Vector2(-104, 64)

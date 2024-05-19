@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmxpx8q4xd4lr"]
+[gd_scene load_steps=15 format=3 uid="uid://bmxpx8q4xd4lr"]
 
 [ext_resource type="Texture2D" uid="uid://dh5rk8yggcgqf" path="res://assets/sprites/void-block.png" id="1_00r8l"]
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_bllim"]
@@ -46,6 +46,9 @@ height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.541667)
 fill_to = Vector2(0.947917, 0.125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sve6h"]
+size = Vector2(64, 160)
 
 [node name="Void" type="Node2D"]
 script = ExtResource("1_bllim")
@@ -98,3 +101,18 @@ texture = SubResource("GradientTexture2D_iriak")
 stream = ExtResource("8_2j5do")
 volume_db = -18.0
 autoplay = true
+
+[node name="VoidDown" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
+position = Vector2(-190, 621)
+script = ExtResource("6_123sd")
+target_room = "Cave3"
+target_location = "Cave3Top"
+collision_shape = NodePath("CollisionShape2D")
+spawn = NodePath("Spawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VoidDown"]
+position = Vector2(0, 40)
+shape = SubResource("RectangleShape2D_sve6h")
+
+[node name="Spawn" type="Marker2D" parent="VoidDown"]
+position = Vector2(0, -154)
