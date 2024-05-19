@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://biewheg74mlyb"]
+
+[ext_resource type="Script" path="res://assets/scripts/splash_screen.gd" id="1_w7h4y"]
+[ext_resource type="Texture2D" uid="uid://bssr5o20sppn4" path="res://assets/sprites/splash_screen.png" id="2_k5e6c"]
+
+[sub_resource type="Animation" id="Animation_d3hgr"]
+resource_name = "fade"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg32g"]
+_data = {
+"fade": SubResource("Animation_d3hgr")
+}
+
+[node name="SplashScreen" type="Node2D"]
+script = ExtResource("1_w7h4y")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("2_k5e6c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hg32g")
+}

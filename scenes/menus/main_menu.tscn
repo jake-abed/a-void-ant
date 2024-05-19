@@ -1,0 +1,237 @@
+[gd_scene load_steps=26 format=3 uid="uid://ceknn6f65doc7"]
+
+[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_bvvii"]
+[ext_resource type="PackedScene" uid="uid://c1jrqfbypyw2" path="res://scenes/void_bg.tscn" id="1_sw8eu"]
+[ext_resource type="LabelSettings" uid="uid://d00c388mb34q" path="res://assets/theme/subtitle_label.tres" id="2_densr"]
+[ext_resource type="Script" path="res://assets/scripts/the_void.gd" id="3_mrysw"]
+[ext_resource type="LabelSettings" uid="uid://ltht0jjn50pn" path="res://assets/theme/menu_text.tres" id="4_d60gb"]
+[ext_resource type="Texture2D" uid="uid://c1mjmimw6xutx" path="res://assets/sprites/the-void-blur.png" id="4_gxejn"]
+[ext_resource type="Texture2D" uid="uid://diefjx3bii2q" path="res://assets/sprites/void-ant.png" id="4_mp3tt"]
+[ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="6_wpebu"]
+[ext_resource type="AudioStream" uid="uid://clpqb6nplq30g" path="res://assets/audio/a-void-ant-title.wav" id="7_w68b5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xfs3a"]
+font_size = 96
+outline_size = 8
+outline_color = Color(0.266667, 0.160784, 0.356863, 1)
+shadow_size = 24
+shadow_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahl56"]
+radius = 97.0116
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywmtt"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5d50"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iwvm"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5bo6"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hedrb"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fbjf"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0msho"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tbfl"]
+atlas = ExtResource("4_gxejn")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6135"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywmtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5d50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iwvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5bo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hedrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fbjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0msho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tbfl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_lvxa8"]
+colors = PackedColorArray(0.780392, 0.792157, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w36os"]
+gradient = SubResource("Gradient_lvxa8")
+width = 500
+height = 300
+fill = 1
+fill_from = Vector2(0.536697, 0.509174)
+fill_to = Vector2(0.862385, 0.122324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa4yq"]
+atlas = ExtResource("4_mp3tt")
+region = Rect2(864, 0, 48, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljpma"]
+atlas = ExtResource("4_mp3tt")
+region = Rect2(912, 0, 48, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cf5su"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa4yq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljpma")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_next = NodePath("VBoxContainer/Start")
+focus_previous = NodePath("VBoxContainer/Controls")
+script = ExtResource("1_bvvii")
+
+[node name="VoidBg" parent="." instance=ExtResource("1_sw8eu")]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 93.0
+offset_right = 1275.0
+offset_bottom = 177.0
+text = "KOKu"
+label_settings = SubResource("LabelSettings_xfs3a")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 172.0
+offset_right = 1272.0
+offset_bottom = 256.0
+text = "A VOID ANT"
+label_settings = ExtResource("2_densr")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 707.0
+offset_top = 11.0
+offset_right = 770.0
+offset_bottom = 143.0
+text = "-"
+label_settings = SubResource("LabelSettings_xfs3a")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 589.0
+offset_right = 1269.0
+offset_bottom = 692.0
+text = "A GAME BY JAKE ABED
+CREATED FOR GODOT WILD JAM # 69"
+label_settings = ExtResource("4_d60gb")
+horizontal_alignment = 1
+
+[node name="TheVoid" type="Area2D" parent="." node_paths=PackedStringArray("sprite", "light")]
+position = Vector2(195, 198)
+scale = Vector2(3, 3)
+script = ExtResource("3_mrysw")
+sprite = NodePath("AnimatedSprite2D")
+light = NodePath("PointLight2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TheVoid"]
+shape = SubResource("CircleShape2D_ahl56")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TheVoid"]
+sprite_frames = SubResource("SpriteFrames_d6135")
+frame_progress = 0.322956
+
+[node name="PointLight2D" type="PointLight2D" parent="TheVoid"]
+energy = 1.25
+blend_mode = 2
+texture = SubResource("GradientTexture2D_w36os")
+
+[node name="TheVoid2" type="Area2D" parent="." node_paths=PackedStringArray("sprite", "light")]
+position = Vector2(1083, 526)
+scale = Vector2(2, 2)
+script = ExtResource("3_mrysw")
+sprite = NodePath("AnimatedSprite2D")
+light = NodePath("../TheVoid/PointLight2D")
+tween_speed_factor = 0.75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TheVoid2"]
+shape = SubResource("CircleShape2D_ahl56")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TheVoid2"]
+sprite_frames = SubResource("SpriteFrames_cf5su")
+frame_progress = 0.344065
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="TheVoid2"]
+energy = 1.25
+blend_mode = 2
+texture = SubResource("GradientTexture2D_w36os")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 279.0
+offset_right = 805.0
+offset_bottom = 517.0
+theme = ExtResource("6_wpebu")
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Controls")
+focus_next = NodePath("../Controls")
+theme = ExtResource("6_wpebu")
+theme_type_variation = &"FlatButton"
+text = "START"
+
+[node name="Controls" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_previous = NodePath("../Start")
+text = "CONTROLS"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w68b5")
+volume_db = -24.0
+autoplay = true

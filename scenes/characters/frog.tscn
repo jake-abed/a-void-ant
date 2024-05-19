@@ -87,7 +87,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_01j1m"]
 resource_name = "jump"
-length = 0.625
+length = 1.1
 step = 0.0025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -120,7 +120,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1375, 0.15, 0.175, 0.1875, 0.5325, 0.5375, 0.5425, 0.57),
+"times": PackedFloat32Array(0, 0.0125, 0.05, 0.065, 0.08, 0.0925, 0.105, 0.12, 1.04, 1.045, 1.05, 1.0775),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [2, 3, 4, 5, 6, 7, 8, 9, 7, 5, 4, 3]
@@ -199,7 +199,6 @@ states/jump/position = Vector2(447, 31)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_yroxo"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_h3j1a"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_rprr1")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nw4vd"]
-radius = 10.5119
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njbv1"]
 size = Vector2(35.5, 33.5)
@@ -209,6 +208,8 @@ radius = 14.0
 
 [node name="Frog" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_5rfui")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -230,8 +231,6 @@ position = Vector2(1, 2.5)
 shape = SubResource("CircleShape2D_nw4vd")
 
 [node name="JumpTimer" type="Timer" parent="."]
-wait_time = 1.8
-autostart = true
 
 [node name="HurtBox" type="Area2D" parent="."]
 
@@ -249,4 +248,4 @@ shape = SubResource("CircleShape2D_el5ud")
 stream = ExtResource("3_ik6pw")
 volume_db = 5.0
 pitch_scale = 0.35
-max_distance = 500.0
+max_distance = 800.0

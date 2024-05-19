@@ -1,4 +1,11 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://bm7qmio6wov8y"]
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://bm7qmio6wov8y"]
+
+[sub_resource type="Curve" id="Curve_pn4l7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.122449, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ymbun"]
+curve = SubResource("Curve_pn4l7")
 
 [sub_resource type="Curve" id="Curve_uicc4"]
 _data = [Vector2(0, 0.802198), 0.0, 0.0, 0, 0, Vector2(0.518367, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -27,3 +34,4 @@ gravity = Vector3(0, 0, 0)
 damping_min = 50.0
 damping_max = 100.0
 scale_curve = SubResource("CurveTexture_pcnfx")
+alpha_curve = SubResource("CurveTexture_ymbun")

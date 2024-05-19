@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bw4q3om30tfju"]
+[gd_scene load_steps=12 format=3 uid="uid://bw4q3om30tfju"]
 
 [ext_resource type="Script" path="res://assets/scripts/game_controller.gd" id="1_0ndpu"]
 [ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void.tscn" id="1_7dq8o"]
 [ext_resource type="PackedScene" uid="uid://drmaskt8bgyd" path="res://scenes/characters/void_ant.tscn" id="2_kjx0t"]
 [ext_resource type="PackedScene" uid="uid://djdkas1r5gow5" path="res://scenes/menus/pause_menu.tscn" id="4_xf4oo"]
+[ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="5_w6lw4"]
 
 [sub_resource type="Gradient" id="Gradient_abu67"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -28,7 +29,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_bu44n"]
 resource_name = "fade"
-length = 0.25
+length = 0.5
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -37,7 +38,7 @@ tracks/0/path = NodePath("TextureRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.25),
+"times": PackedFloat32Array(0, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -49,19 +50,23 @@ _data = {
 "fade": SubResource("Animation_bu44n")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_7xcm4"]
+font_size = 32
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_0ndpu")
 
 [node name="Player" parent="." instance=ExtResource("2_kjx0t")]
-position = Vector2(522, 438)
+position = Vector2(545, 442)
 
 [node name="FadeLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="FadeLayer"]
 modulate = Color(1, 1, 1, 0)
-offset_right = 1159.0
-offset_bottom = 650.0
+offset_right = 1280.0
+offset_bottom = 720.0
 texture = SubResource("GradientTexture1D_s4r4d")
+metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeLayer"]
 libraries = {
@@ -70,14 +75,123 @@ libraries = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_xf4oo")]
+[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_xf4oo")]
 visible = false
 anchors_preset = 15
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+player = NodePath("../../Player")
 
 [node name="Level" type="Node" parent="."]
 
 [node name="Void" parent="Level" instance=ExtResource("1_7dq8o")]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+scale = Vector2(11.72, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="VoidEnergyPanel" type="Panel" parent="UI/CanvasLayer"]
+offset_left = 1114.0
+offset_top = 18.0
+offset_right = 1263.0
+offset_bottom = 89.0
+theme = ExtResource("5_w6lw4")
+metadata/_edit_use_anchors_ = true
+
+[node name="VoidEnergyLabel" type="Label" parent="UI/CanvasLayer/VoidEnergyPanel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 137.0
+offset_bottom = 26.0
+text = "VOID ENERGY"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VoidEnergyCount" type="Label" parent="UI/CanvasLayer/VoidEnergyPanel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 33.0
+offset_right = 135.0
+offset_bottom = 72.0
+text = "1"
+label_settings = SubResource("LabelSettings_7xcm4")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/CanvasLayer"]
+custom_minimum_size = Vector2(200, 100)
+offset_left = 16.0
+offset_top = 618.0
+offset_right = 365.0
+offset_bottom = 718.0
+theme_override_constants/separation = 20
+
+[node name="VoidDashPanel" type="Panel" parent="UI/CanvasLayer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 75)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_w6lw4")
+
+[node name="VoidDashLabel" type="Label" parent="UI/CanvasLayer/HBoxContainer/VoidDashPanel"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 130.0
+offset_bottom = 42.0
+text = "VOID  DASH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VoidDashAvailableLabel" type="Label" parent="UI/CanvasLayer/HBoxContainer/VoidDashPanel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 40.0
+offset_right = 146.0
+offset_bottom = 71.0
+text = "UNAVAILABLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VoidBallPanel" type="Panel" parent="UI/CanvasLayer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(160, 75)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_w6lw4")
+
+[node name="VoidBallLabel" type="Label" parent="UI/CanvasLayer/HBoxContainer/VoidBallPanel"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = 130.0
+offset_bottom = 42.0
+text = "VOID  BALL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VoidBallAvailableLabel" type="Label" parent="UI/CanvasLayer/HBoxContainer/VoidBallPanel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 40.0
+offset_right = 146.0
+offset_bottom = 71.0
+text = "UNAVAILABLE"
+horizontal_alignment = 1
+vertical_alignment = 1

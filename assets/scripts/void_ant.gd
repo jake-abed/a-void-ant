@@ -1,7 +1,10 @@
 class_name Player extends CharacterBody2D
 
 signal respawn
-signal update_health(health: String)
+signal update_void_points(points: int)
+signal power_enabled(power: String)
+signal power_available(power: String)
+signal power_used(power: String)
 
 const SPEED = 311.0
 const DASH_SPEED = 600.0
@@ -13,7 +16,7 @@ enum State {Normal, Void, Dash}
 
 var rooms_entered = 0
 
-@export var void_points: int = 5
+@export var void_points: int = 1
 
 @export_group("Attached Nodes")
 @export var sprite: Sprite2D
@@ -25,10 +28,12 @@ var rooms_entered = 0
 @export var dash_timer: Timer
 @export var room_timer: Timer
 @export var invuln_timer: Timer
+@export var pos_smoothing_timer: Timer
 @export var ball_particles: GPUParticles2D
 @export var dash_particles: GPUParticles2D
 @export var jump_audio: AudioStreamPlayer2D
 @export var ball_audio: AudioStreamPlayer2D
+@export var dash_audio: AudioStreamPlayer2D
 
 @export_group("Ability Values")
 @export var movement_factor: float = 10.0
@@ -38,6 +43,7 @@ var rooms_entered = 0
 @onready var facing_factor := 1.0
 @onready var checkpoint: Vector2
 @onready var area: Area2D = $Area2D
+@onready var camera: Camera2D = $Camera2D
 @onready var interactables: Array[Area2D] = []
 
 # In light of not using a state machine, these are the state bools
@@ -70,6 +76,7 @@ func _ready() -> void:
 	dash_timer.timeout.connect(_dash_timer_timeout)
 	room_timer.timeout.connect(_on_room_change_timeout)
 	invuln_timer.timeout.connect(_on_invuln_timeout)
+	pos_smoothing_timer.timeout.connect(_on_pos_smoothing_timeout)
 	
 	area.area_entered.connect(_on_area_entered)
 	area.area_exited.connect(_on_area_exited)
@@ -119,6 +126,7 @@ func _physics_process(delta):
 	# Allow void ball ability.
 	if (balled == false && ball_acquired && can_ball && Input.is_action_just_pressed("void_ball")):
 		balled = true
+		power_used.emit("ball")
 		can_ball = false
 		anim_states.travel("into_ball")
 		ball_audio.play()
@@ -176,13 +184,13 @@ func set_sprite_direction() -> void:
 func dash() -> void:
 	if can_dash:
 		can_dash = false
-		ball_audio.pitch_scale = 4
-		ball_audio.play()
+		dash_audio.play()
 		var tween := create_tween()
 		tween.set_ease(Tween.EASE_IN_OUT)
 		dash_timer.wait_time = 0.25
 		dash_timer.start()
 		dashing = true
+		power_used.emit("dash")
 		dash_particles.emitting = true
 		tween.tween_property(self, "dash_factor", 3.0, 0.125)
 		tween.tween_property(self, "dash_factor", 1.0, 0.125)
@@ -205,6 +213,7 @@ func _ball_timer_timeout() -> void:
 		ball_timer.start()
 	else:
 		ball_timer.wait_time = 1.0
+		power_available.emit("ball")
 		can_ball = true
 
 func _coyote_timer_timeout() -> void:
@@ -214,11 +223,11 @@ func _dash_timer_timeout() -> void:
 	if dashing:
 		dashing = false
 		ball_audio.stop()
-		ball_audio.pitch_scale = 0.75
 		dash_timer.wait_time = 1.2
 		dash_timer.start()
 	else:
 		can_dash = true
+		power_available.emit("dash")
 		dash_factor = 3.0
 
 func _on_room_change_timeout() -> void:
@@ -240,11 +249,14 @@ func take_damage(amount: int) -> void:
 	invuln_timer.start()
 	respawn.emit()
 	void_points -= amount
+	update_void_points.emit(void_points)
+	print(void_points)
 	global_position = checkpoint
 	anim_states.travel("respawn")
 
 func gain_void(amount: int) -> void:
 	void_points += amount
+	update_void_points.emit(void_points)
 
 func set_checkpoint(pos: Vector2) -> void:
 	checkpoint = pos
@@ -264,3 +276,19 @@ func enable_powerup(name: String) -> void:
 			dash_acquired = true
 		"ball":
 			ball_acquired = true
+	power_enabled.emit(name)
+	power_available.emit(name)
+
+func toggle_position_smoothing() -> void:
+	print("Toggling position smoothing")
+	camera.position_smoothing_enabled = false
+	pos_smoothing_timer.start()
+
+func _on_pos_smoothing_timeout() -> void:
+	camera.position_smoothing_enabled = true
+
+func return_to_checkpoint() -> void:
+	invuln = true
+	invuln_timer.start()
+	global_position = checkpoint
+	anim_states.travel("respawn")

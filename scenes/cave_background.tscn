@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://tcmwkeds5f46"]
+
+[ext_resource type="Texture2D" uid="uid://h8wwhmjjeksh" path="res://assets/sprites/cave-bg-black.png" id="1_ydyqx"]
+[ext_resource type="Texture2D" uid="uid://bk4l4bc6qmsum" path="res://assets/sprites/cave-stal.png" id="2_kla4d"]
+
+[node name="CaveBackground" type="ParallaxBackground"]
+offset = Vector2(576, 324)
+transform = Transform2D(1, 0, 0, 1, 576, 324)
+scroll_offset = Vector2(-1846.57, 143.322)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1152, 648)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture = ExtResource("1_ydyqx")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(1152, 648)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("2_kla4d")

@@ -31,7 +31,7 @@ func give_power(player: Player) -> void:
 	tween.set_parallel()
 	
 	tween.tween_property(parent, "scale", Vector2(0,0), 0.35)
-	tween.tween_property(parent, "global_position", player.global_position, 0.25)
+	tween.tween_property(parent, "global_position", player.global_position + player.velocity * 0.3, 0.35)
 	await tween.finished
 	SceneManager.set_collected(parent.name)
 	parent.queue_free()

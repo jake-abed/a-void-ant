@@ -2,6 +2,7 @@ extends Area2D
 
 @export var sprite: AnimatedSprite2D
 @export var light : PointLight2D
+@export var tween_speed_factor: float = 1.0
 
 func _ready():
 	sprite.play("default")
@@ -20,8 +21,8 @@ func play_float_anim() -> void:
 	var pos_offset_down := pos_offset_up + 15.0
 	var duration := 2.0
 	
-	tween.tween_property(self, "position:y", pos_offset_up, duration)
-	tween.tween_property(self, "position:y", pos_offset_down, duration)
+	tween.tween_property(self, "position:y", pos_offset_up, duration * tween_speed_factor)
+	tween.tween_property(self, "position:y", pos_offset_down, duration * tween_speed_factor)
 	tween.set_loops()
 
 func adjust_lighting() -> void:

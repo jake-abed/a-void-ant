@@ -1,11 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmxpx8q4xd4lr"]
+[gd_scene load_steps=14 format=3 uid="uid://bmxpx8q4xd4lr"]
 
 [ext_resource type="Texture2D" uid="uid://dh5rk8yggcgqf" path="res://assets/sprites/void-block.png" id="1_00r8l"]
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_bllim"]
 [ext_resource type="PackedScene" uid="uid://blik1dw7skd68" path="res://scenes/characters/the_void.tscn" id="2_cjha8"]
-[ext_resource type="Texture2D" uid="uid://dl61uhx6o6urf" path="res://assets/sprites/void-bg.png" id="3_bsyrd"]
-[ext_resource type="Texture2D" uid="uid://di2o188w8bxi1" path="res://assets/sprites/void-nebula.png" id="4_ng62j"]
-[ext_resource type="Texture2D" uid="uid://bpeo306muubj4" path="res://assets/sprites/void-stars.png" id="5_ny1ii"]
+[ext_resource type="PackedScene" uid="uid://c1jrqfbypyw2" path="res://scenes/void_bg.tscn" id="4_1gvbg"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="6_123sd"]
 [ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="8_2j5do"]
 
@@ -65,31 +63,7 @@ position = Vector2(354, 341)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(576, 324)
-scale = Vector2(2, 2)
-motion_mirroring = Vector2(1152, 648)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource("3_bsyrd")
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(576, 324)
-motion_scale = Vector2(0.1, 0.1)
-motion_mirroring = Vector2(1152, 648)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-texture = ExtResource("4_ng62j")
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(576, 324)
-motion_scale = Vector2(0.3, 0.05)
-motion_mirroring = Vector2(1152, 648)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource("5_ny1ii")
+[node name="VoidBg" parent="." instance=ExtResource("4_1gvbg")]
 
 [node name="VoidEast" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
 position = Vector2(1583, 428)

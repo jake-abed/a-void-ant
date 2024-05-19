@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://chwvj1emyap2g"]
+
+[ext_resource type="StyleBox" uid="uid://buptvj32mrb4l" path="res://assets/theme/focus_button.tres" id="1_1s3ty"]
+[ext_resource type="StyleBox" uid="uid://cms01sy3uy446" path="res://assets/theme/normal_button.tres" id="1_8yllp"]
+[ext_resource type="StyleBox" uid="uid://d10xb4h2jquc3" path="res://assets/theme/hover_button.tres" id="2_3rw2f"]
+[ext_resource type="StyleBox" uid="uid://b2xiihf185mm0" path="res://assets/theme/pressed_button.tres" id="3_v3xf4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drvdf"]
+bg_color = Color(0.111616, 0.0161732, 0.194138, 0.545098)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[resource]
+/colors/default = Color(0, 0, 0, 1)
+/constants/default = 16
+Button/colors/font_outline_color = Color(0.266667, 0.160784, 0.356863, 1)
+Button/constants/outline_size = 4
+Button/styles/focus = ExtResource("1_1s3ty")
+Button/styles/hover = ExtResource("2_3rw2f")
+Button/styles/normal = ExtResource("1_8yllp")
+Button/styles/pressed = ExtResource("3_v3xf4")
+Panel/styles/panel = SubResource("StyleBoxFlat_drvdf")
+VBoxContainer/constants/separation = 48

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgvulkdi5e27b"]
+
+[ext_resource type="Texture2D" uid="uid://iq6vfwilqryv" path="res://assets/sprites/ball_ant.png" id="1_le8u7"]
+[ext_resource type="PackedScene" uid="uid://d1v4gl6mcq8lr" path="res://scenes/powerup.tscn" id="2_24ect"]
+
+[sub_resource type="Gradient" id="Gradient_cik6r"]
+offsets = PackedFloat32Array(0.0401606, 0.606426, 1)
+colors = PackedColorArray(0.615686, 0.376471, 0.682353, 1, 0.25098, 0.152941, 0.278431, 0.215686, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cgvf5"]
+gradient = SubResource("Gradient_cik6r")
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.6)
+fill_to = Vector2(1, 0.128)
+
+[node name="BallAnt" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_le8u7")
+
+[node name="Powerup" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_24ect")]
+position = Vector2(0, 7)
+parent = NodePath("..")
+power = "ball"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -23)
+texture = SubResource("GradientTexture2D_cgvf5")

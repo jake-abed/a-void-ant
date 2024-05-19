@@ -57,6 +57,8 @@ fill_from = Vector2(0.5, 0.6)
 fill_to = Vector2(1, 0.146)
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitbox", "hurtbox", "ray")]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_n234u")
 sprite = NodePath("AnimatedSprite2D")
 hitbox = NodePath("HitBox")
