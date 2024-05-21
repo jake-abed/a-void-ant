@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://djdkas1r5gow5"]
+[gd_scene load_steps=7 format=3 uid="uid://djdkas1r5gow5"]
 
 [ext_resource type="Script" path="res://assets/scripts/pause_menu.gd" id="1_lftua"]
 [ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="2_a3q8j"]
+[ext_resource type="StyleBox" uid="uid://c84cl03t5t2ge" path="res://transparent_style_box.tres" id="3_y3wec"]
 
 [sub_resource type="Gradient" id="Gradient_gft5b"]
 colors = PackedColorArray(0, 0, 0, 0.254902, 0, 0, 0, 0.839216)
@@ -17,7 +18,7 @@ fill_to = Vector2(0.135417, 0.160305)
 [sub_resource type="LabelSettings" id="LabelSettings_6npmu"]
 font_size = 32
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("pause_button", "unstick_button")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("pause_button", "unstick_button", "controls_button")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 8
@@ -30,6 +31,7 @@ grow_vertical = 2
 script = ExtResource("1_lftua")
 pause_button = NodePath("TextureRect/Panel/VBoxContainer/Pause")
 unstick_button = NodePath("TextureRect/Panel/VBoxContainer/Unstick")
+controls_button = NodePath("TextureRect/Panel/VBoxContainer/Controls")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -44,13 +46,14 @@ offset_top = 249.0
 offset_right = 773.0
 offset_bottom = 539.0
 theme = ExtResource("2_a3q8j")
+theme_override_styles/panel = ExtResource("3_y3wec")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/Panel"]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 18.0
+offset_top = 16.0
 offset_right = 252.0
-offset_bottom = 280.0
+offset_bottom = 278.0
 theme = ExtResource("2_a3q8j")
 theme_override_constants/separation = 20
 alignment = 1
@@ -60,7 +63,6 @@ layout_mode = 2
 text = "CONTINUE"
 
 [node name="Controls" type="Button" parent="TextureRect/Panel/VBoxContainer"]
-visible = false
 layout_mode = 2
 tooltip_text = "Git Gud"
 text = "CONTROLS

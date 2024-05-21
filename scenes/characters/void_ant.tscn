@@ -531,7 +531,7 @@ randomness = 0.5
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_arn2e")
 hframes = 29
-frame = 2
+frame = 6
 region_rect = Rect2(0, 0, 528, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -572,6 +572,7 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="Area2D" type="Area2D" parent="."]

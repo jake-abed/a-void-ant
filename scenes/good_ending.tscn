@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cerjj2hxrguq3"]
+[gd_scene load_steps=58 format=3 uid="uid://cerjj2hxrguq3"]
 
 [ext_resource type="Script" path="res://assets/scripts/good_ending.gd" id="1_3xrvn"]
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="2_n776k"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c1jrqfbypyw2" path="res://scenes/void_bg.tscn" id="6_axe6l"]
 [ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="6_es5w1"]
 [ext_resource type="Script" path="res://assets/scripts/portal.gd" id="7_m1e3n"]
+[ext_resource type="StyleBox" uid="uid://c84cl03t5t2ge" path="res://transparent_style_box.tres" id="10_bhexe"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_83d3l"]
 
@@ -534,6 +535,7 @@ offset_top = 487.0
 offset_right = 1254.0
 offset_bottom = 688.0
 theme = ExtResource("3_u4g5y")
+theme_override_styles/panel = ExtResource("10_bhexe")
 
 [node name="Dialog" type="Label" parent="Control/CanvasLayer/Panel"]
 layout_mode = 0

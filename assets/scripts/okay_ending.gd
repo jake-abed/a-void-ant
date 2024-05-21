@@ -44,6 +44,7 @@ func _on_continue_pressed() -> void:
 		return
 	elif dialog_lines.is_empty():
 		continue_button.release_focus()
+		continue_button.disabled = true
 		anim_player.play("fade_out")
 
 func _on_anim_finished(anim_name: StringName) -> void:

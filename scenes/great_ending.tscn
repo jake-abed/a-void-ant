@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://d8va1y55oilj"]
+[gd_scene load_steps=58 format=3 uid="uid://d8va1y55oilj"]
 
 [ext_resource type="Script" path="res://scenes/great_ending.gd" id="1_7xt71"]
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="2_jomvc"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="8_74njw"]
 [ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="9_awg05"]
 [ext_resource type="LabelSettings" uid="uid://blqsoq6mvs6eb" path="res://assets/theme/dialog_text.tres" id="10_6cm5l"]
+[ext_resource type="StyleBox" uid="uid://c84cl03t5t2ge" path="res://transparent_style_box.tres" id="10_msdtl"]
 [ext_resource type="Texture2D" uid="uid://diefjx3bii2q" path="res://assets/sprites/void-ant.png" id="11_8g5xv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_83d3l"]
@@ -534,6 +535,7 @@ offset_top = 487.0
 offset_right = 1254.0
 offset_bottom = 688.0
 theme = ExtResource("9_awg05")
+theme_override_styles/panel = ExtResource("10_msdtl")
 
 [node name="Dialog" type="Label" parent="Control/CanvasLayer/Panel"]
 layout_mode = 0

@@ -203,9 +203,9 @@ texture = SubResource("GradientTexture2D_w36os")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 461.0
-offset_top = 279.0
+offset_top = 262.0
 offset_right = 805.0
-offset_bottom = 517.0
+offset_bottom = 500.0
 theme = ExtResource("6_wpebu")
 alignment = 1
 
@@ -218,7 +218,6 @@ theme_type_variation = &"FlatButton"
 text = "START"
 
 [node name="Controls" type="Button" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 focus_previous = NodePath("../Start")
 text = "CONTROLS"

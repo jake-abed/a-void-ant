@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://mu5ypckvkuvy"]
+[gd_scene load_steps=33 format=3 uid="uid://mu5ypckvkuvy"]
 
 [ext_resource type="Script" path="res://assets/scripts/intro.gd" id="1_2hd87"]
 [ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void.tscn" id="1_hop6p"]
 [ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="2_pk6y3"]
 [ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="3_t02fl"]
+[ext_resource type="StyleBox" uid="uid://c84cl03t5t2ge" path="res://transparent_style_box.tres" id="4_f1t2y"]
 [ext_resource type="LabelSettings" uid="uid://blqsoq6mvs6eb" path="res://assets/theme/dialog_text.tres" id="4_o8ef8"]
 [ext_resource type="Texture2D" uid="uid://diefjx3bii2q" path="res://assets/sprites/void-ant.png" id="6_xn888"]
 
@@ -31,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xwpg6"]
@@ -326,6 +327,7 @@ offset_top = 487.0
 offset_right = 1254.0
 offset_bottom = 688.0
 theme = ExtResource("2_pk6y3")
+theme_override_styles/panel = ExtResource("4_f1t2y")
 
 [node name="Dialog" type="Label" parent="Control/CanvasLayer/Panel"]
 layout_mode = 0
@@ -358,7 +360,7 @@ libraries = {
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(519, 442)

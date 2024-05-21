@@ -1,14 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctcew8cb0jkrq"]
+[gd_scene load_steps=5 format=3 uid="uid://ctcew8cb0jkrq"]
 
 [ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="1_0r2sg"]
+[ext_resource type="Script" path="res://scenes/menus/controls.gd" id="1_xydq4"]
+[ext_resource type="StyleBox" uid="uid://e5w4lah6l2w7" path="res://opaque_style_box.tres" id="3_bv044"]
+[ext_resource type="LabelSettings" uid="uid://ltht0jjn50pn" path="res://assets/theme/menu_text.tres" id="3_wix3e"]
 
 [node name="Controls" type="Control"]
+z_index = 1000
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xydq4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -16,3 +21,82 @@ grow_vertical = 2
 offset_right = 1280.0
 offset_bottom = 720.0
 theme = ExtResource("1_0r2sg")
+theme_override_styles/panel = ExtResource("3_bv044")
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 608.0
+offset_right = 748.0
+offset_bottom = 670.0
+theme = ExtResource("1_0r2sg")
+theme_type_variation = &"FlatButton"
+text = "BACK
+"
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 160.0
+offset_right = 745.0
+offset_bottom = 192.0
+text = "CONTROLS"
+label_settings = ExtResource("3_wix3e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Keyboard" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 240.0
+offset_right = 608.0
+offset_bottom = 296.0
+theme = ExtResource("1_0r2sg")
+theme_type_variation = &"HeaderLarge"
+text = "KEYBOARD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Keyboard Controls" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 312.0
+offset_right = 568.0
+offset_bottom = 520.0
+theme = ExtResource("1_0r2sg")
+bbcode_enabled = true
+text = "[ul]Movement - WASD[/ul]
+[ul]Jump - Space[/ul]
+[ul]Interact - E[/ul]
+[ul]Void Dash - L Shift[/ul]
+[ul]Void Ball - Q[/ul]
+"
+
+[node name="Controller" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 733.0
+offset_top = 240.0
+offset_right = 1053.0
+offset_bottom = 296.0
+theme = ExtResource("1_0r2sg")
+theme_type_variation = &"HeaderLarge"
+text = "CONTROLLER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Keyboard Controls2" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 312.0
+offset_right = 1031.0
+offset_bottom = 552.0
+theme = ExtResource("1_0r2sg")
+bbcode_enabled = true
+text = "[ul]Movement - LS[/ul]
+[ul]Jump - A/X[/ul]
+[ul]Interact - X/SQUARE[/ul]
+[ul]Void Dash - RB/R1[/ul]
+[ul]Void Ball - LB/L1[/ul]
+
+XBOX / PLAYSTATION
+"

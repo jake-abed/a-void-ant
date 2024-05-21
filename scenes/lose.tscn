@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://1ncnyv2dn3ny"]
+[gd_scene load_steps=19 format=3 uid="uid://1ncnyv2dn3ny"]
 
 [ext_resource type="Script" path="res://assets/scripts/lose.gd" id="1_33py5"]
 [ext_resource type="PackedScene" uid="uid://bmxpx8q4xd4lr" path="res://scenes/levels/void.tscn" id="2_kw2xw"]
 [ext_resource type="Theme" uid="uid://chwvj1emyap2g" path="res://assets/theme/void-ant-theme.tres" id="3_4qw0k"]
+[ext_resource type="StyleBox" uid="uid://c84cl03t5t2ge" path="res://transparent_style_box.tres" id="4_0lyyd"]
 [ext_resource type="LabelSettings" uid="uid://blqsoq6mvs6eb" path="res://assets/theme/dialog_text.tres" id="4_krlpn"]
 [ext_resource type="AudioStream" uid="uid://dehatie4gaqtp" path="res://assets/audio/void-ant-void-theme.wav" id="6_5msy5"]
 
@@ -233,6 +234,7 @@ offset_top = 487.0
 offset_right = 1254.0
 offset_bottom = 688.0
 theme = ExtResource("3_4qw0k")
+theme_override_styles/panel = ExtResource("4_0lyyd")
 
 [node name="Dialog" type="Label" parent="Control/CanvasLayer/Panel"]
 layout_mode = 0

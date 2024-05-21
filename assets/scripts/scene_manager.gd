@@ -48,6 +48,7 @@ func go_to_level(level: String, destination: String) -> void:
 	if scene_to_load != null:
 		spawn_door_tag = destination
 		room_change.emit()
+		print(get_tree().current_scene)
 		level_node.get_node(current_room).queue_free()
 		var scene_instance := scene_to_load.instantiate()
 		level_node.call_deferred("add_child", scene_instance)
@@ -57,3 +58,9 @@ func go_to_level(level: String, destination: String) -> void:
 
 func set_collected(name: String) -> void:
 	spawns[current_room][name] = false
+
+func reset() -> void:
+	current_room = "Void"
+	for key in spawns:
+		spawns[key] = {}
+

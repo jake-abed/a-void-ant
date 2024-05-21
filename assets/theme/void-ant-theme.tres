@@ -1,16 +1,52 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://chwvj1emyap2g"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://chwvj1emyap2g"]
 
 [ext_resource type="StyleBox" uid="uid://buptvj32mrb4l" path="res://assets/theme/focus_button.tres" id="1_1s3ty"]
 [ext_resource type="StyleBox" uid="uid://cms01sy3uy446" path="res://assets/theme/normal_button.tres" id="1_8yllp"]
 [ext_resource type="StyleBox" uid="uid://d10xb4h2jquc3" path="res://assets/theme/hover_button.tres" id="2_3rw2f"]
 [ext_resource type="StyleBox" uid="uid://b2xiihf185mm0" path="res://assets/theme/pressed_button.tres" id="3_v3xf4"]
+[ext_resource type="StyleBox" uid="uid://e5w4lah6l2w7" path="res://opaque_style_box.tres" id="5_4u25a"]
+[ext_resource type="FontFile" uid="uid://fsj8uxiwyups" path="res://assets/fonts/Minimal5x7.ttf" id="6_3wt8m"]
+[ext_resource type="FontFile" uid="uid://cmegj2mabi801" path="res://assets/fonts/Minimal5x5Monospaced.ttf" id="6_uft83"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drvdf"]
-bg_color = Color(0.111616, 0.0161732, 0.194138, 0.545098)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+[sub_resource type="FontVariation" id="FontVariation_v3b4o"]
+base_font = ExtResource("6_uft83")
+variation_embolden = 1.2
+
+[sub_resource type="FontVariation" id="FontVariation_uxdi4"]
+base_font = ExtResource("6_uft83")
+variation_embolden = 1.2
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_q6lxd"]
+base_font = ExtResource("6_uft83")
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2nf4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vqqpj"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 
 [resource]
 /colors/default = Color(0, 0, 0, 1)
@@ -21,5 +57,34 @@ Button/styles/focus = ExtResource("1_1s3ty")
 Button/styles/hover = ExtResource("2_3rw2f")
 Button/styles/normal = ExtResource("1_8yllp")
 Button/styles/pressed = ExtResource("3_v3xf4")
-Panel/styles/panel = SubResource("StyleBoxFlat_drvdf")
+Panel/styles/panel = ExtResource("5_4u25a")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_outline_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_selected_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/selection_color = Color(0.1, 0.1, 1, 0.8)
+RichTextLabel/colors/table_border = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_even_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_odd_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+RichTextLabel/constants/text_highlight_h_padding = 3
+RichTextLabel/constants/text_highlight_v_padding = 3
+RichTextLabel/font_sizes/bold_font_size = 16
+RichTextLabel/font_sizes/bold_italics_font_size = 16
+RichTextLabel/font_sizes/italics_font_size = 16
+RichTextLabel/font_sizes/mono_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 36
+RichTextLabel/fonts/bold_font = SubResource("FontVariation_v3b4o")
+RichTextLabel/fonts/bold_italics_font = SubResource("FontVariation_uxdi4")
+RichTextLabel/fonts/italics_font = SubResource("FontVariation_q6lxd")
+RichTextLabel/fonts/mono_font = ExtResource("6_uft83")
+RichTextLabel/fonts/normal_font = ExtResource("6_3wt8m")
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_e2nf4")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_vqqpj")
 VBoxContainer/constants/separation = 48

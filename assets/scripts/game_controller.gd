@@ -23,6 +23,7 @@ func _process(delta):
 
 func _fade_in() -> void:
 	if player.void_points <= 0:
+		SceneManager.reset()
 		get_tree().call_deferred("change_scene_to_file", "res://scenes/lose.tscn")
 	fade_player.play("fade")
 
