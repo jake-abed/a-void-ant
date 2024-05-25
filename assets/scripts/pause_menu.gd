@@ -5,7 +5,7 @@ const controls := preload("res://scenes/menus/controls.tscn")
 @export var pause_button: Button
 @export var unstick_button: Button
 @export var player: Player
-@export var controls_button := Button
+@export var controls_button : Button
 
 @onready var panel := $TextureRect
 @onready var pause_label := $Label
@@ -15,6 +15,7 @@ func _ready():
 	pause_button.pressed.connect(_pause_button_pressed)
 	unstick_button.pressed.connect(_to_last_checkpoint)
 	controls_button.pressed.connect(_controls_button_pressed)
+	pause_button.grab_focus()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -30,6 +31,7 @@ func toggle_pause() -> void:
 		return
 	self.visible = !self.visible
 	get_tree().paused = !get_tree().paused
+	pause_button.grab_focus()
 
 func _to_last_checkpoint() -> void:
 	player.return_to_checkpoint()
@@ -47,3 +49,4 @@ func _controls_closed() -> void:
 	controls_open = false
 	panel.visible = true
 	pause_label.visible = true
+	controls_button.grab_focus()

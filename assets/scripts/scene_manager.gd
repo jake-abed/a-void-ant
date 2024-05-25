@@ -63,4 +63,3 @@ func reset() -> void:
 	current_room = "Void"
 	for key in spawns:
 		spawns[key] = {}
-

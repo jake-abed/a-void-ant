@@ -10,7 +10,7 @@ const SPEED = 311.0
 const DASH_SPEED = 600.0
 const BALL_SPEED = 250.0
 const JUMP_VELOCITY = -469.0
-const INERTIA := 0.4
+const INERTIA := 0.5
 
 enum State {Normal, Void, Dash}
 
@@ -85,7 +85,6 @@ func _ready() -> void:
 	SceneManager.room_change.connect(_on_room_change)
 
 func _process(delta):
-	set_sprite_direction()
 	if Input.is_action_just_pressed("interact") && interactables.size() > 0:
 		if interactables[0] is Powerup:
 			enable_powerup(interactables[0].power)
@@ -94,6 +93,7 @@ func _process(delta):
 			offer_void()
 
 func _physics_process(delta):
+	set_sprite_direction()
 	# Set the facing_factor to affect direction-based movements.
 	if sprite.flip_h:
 		facing_factor = -1.0

@@ -4,8 +4,8 @@ extends Sprite2D
 @onready var low_val := randf_range(0.75, 0.9)
 @onready var high_val := randf_range(1.3, 1.45)
 @onready var time := randf_range(3.0, 5.0)
-@onready var min_light_scale := randf_range(9.0, 10.0)
-@onready var max_light_scale := randf_range(12.0, 14.0)
+@onready var min_light_scale := randf_range(1.25, 1.75)
+@onready var max_light_scale := randf_range(2.0, 2.5)
 
 func _ready():
 	light.energy = low_val
@@ -28,6 +28,6 @@ func modulate_light_size() -> void:
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	
-	tween.tween_property(light, "scale", Vector2(min_light_scale, min_light_scale), time * 2.5)
-	tween.tween_property(light, "scale", Vector2(max_light_scale, max_light_scale), time * 2.5)
+	tween.tween_property(light, "scale", Vector2(min_light_scale, min_light_scale), time * 2.0)
+	tween.tween_property(light, "scale", Vector2(max_light_scale, max_light_scale), time * 2.0)
 	tween.set_loops()
