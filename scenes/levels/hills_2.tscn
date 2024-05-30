@@ -132,6 +132,7 @@ position = Vector2(-172, 180)
 stream = ExtResource("8_c0ls2")
 volume_db = -16.0
 autoplay = true
+bus = &"Music"
 
 [node name="Pellet" parent="." instance=ExtResource("10_cqfya")]
 position = Vector2(2352, -208)

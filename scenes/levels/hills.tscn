@@ -632,6 +632,7 @@ position = Vector2(2888, -1600)
 stream = ExtResource("10_1neec")
 volume_db = -16.0
 autoplay = true
+bus = &"Music"
 
 [node name="Checkpoint2" type="Area2D" parent="." node_paths=PackedStringArray("marker")]
 position = Vector2(1576, -696)

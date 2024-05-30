@@ -35,6 +35,8 @@ func _on_jump_timer_timeout() -> void:
 	jump_timer.wait_time = jump_wait_time
 	velocity.y += JUMP_VELOCITY
 	anim_state.travel("jump")
+	audio.seek(0.05)
+	audio.pitch_scale = randf_range(0.30, 0.40)
 	audio.play()
 
 func _hitbox_entered(body: Node2D) -> void:

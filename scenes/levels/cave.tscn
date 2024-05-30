@@ -379,6 +379,7 @@ position = Vector2(47, 87)
 stream = ExtResource("12_3xt8a")
 volume_db = -15.0
 autoplay = true
+bus = &"Music"
 
 [node name="CaveEast" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
 position = Vector2(2928, -1)

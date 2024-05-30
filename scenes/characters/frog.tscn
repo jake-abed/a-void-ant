@@ -249,3 +249,4 @@ stream = ExtResource("3_ik6pw")
 volume_db = 5.0
 pitch_scale = 0.35
 max_distance = 800.0
+bus = &"SFX"

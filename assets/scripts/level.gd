@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var audio := $AudioStreamPlayer
+
 func _ready():
 	despawn_collected()
 

@@ -50,6 +50,7 @@ texture = ExtResource("5_2d8og")
 stream = ExtResource("4_qh04v")
 volume_db = -15.0
 autoplay = true
+bus = &"Music"
 
 [node name="MagmaShroom" parent="." instance=ExtResource("6_137i4")]
 position = Vector2(1608, 312)

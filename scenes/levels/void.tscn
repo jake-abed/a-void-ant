@@ -97,11 +97,6 @@ energy = 1.5
 blend_mode = 2
 texture = SubResource("GradientTexture2D_iriak")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_2j5do")
-volume_db = -15.0
-autoplay = true
-
 [node name="VoidDown" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape", "spawn")]
 position = Vector2(-190, 621)
 script = ExtResource("6_123sd")
@@ -116,3 +111,9 @@ shape = SubResource("RectangleShape2D_sve6h")
 
 [node name="Spawn" type="Marker2D" parent="VoidDown"]
 position = Vector2(0, -154)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_2j5do")
+volume_db = -25.0
+autoplay = true
+bus = &"Music"

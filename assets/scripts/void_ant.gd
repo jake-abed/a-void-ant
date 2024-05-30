@@ -133,6 +133,7 @@ func _physics_process(delta):
 		power_used.emit("ball")
 		can_ball = false
 		anim_states.travel("into_ball")
+		ball_audio.seek(0.0)
 		ball_audio.play()
 		ball_particles.emitting = true
 		ball_timer.start()
@@ -155,6 +156,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and can_jump and !balled:
 		grounded = false
 		can_jump = false
+		jump_audio.pitch_scale = randf_range(0.90, 1.10)
+		jump_audio.seek(0.03)
 		jump_audio.play()
 		anim_states.travel("jump")
 		velocity.y += JUMP_VELOCITY
